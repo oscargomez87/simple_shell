@@ -16,6 +16,7 @@ void _read(char **command_line)
 	/**
      * To read command line and exit in case of error.
      */
+
 	len_of_read = getline(&(*command_line), &len_of_command, stdin);
 	if (len_of_read == -1)
 	{

@@ -33,19 +33,19 @@ int main(int argc, char **argv)
  * file_found = stat(command_line, &st);
  * file_access = access(command_line, F_OK | X_OK);
  *
- * EN ARCHIVO _read.c, por qué aparece EXIT SUCCESS en la siguiente instrucción??
+ * EN ARCHIVO _read.c, por quï¿½ aparece EXIT SUCCESS en la siguiente instrucciï¿½n??
  * if (len_of_read == -1)
  *
  *
  *
  * PENDINGS
  *
- * DEBERÍAMOS COLOCAR char *command_exit = "exit"; QUE ESTÁ EN _READ.C, EN HEADER shs.h
+ * DEBERï¿½AMOS COLOCAR char *command_exit = "exit"; QUE ESTï¿½ EN _READ.C, EN HEADER shs.h
  *
  * Task Simple shell 0.1 mandatory
  * Write a UNIX command line interpreter.
  * 	*) Handle errors.
- * 	*) You have to handle the “end of file” condition (Ctrl+D)
+ * 	*) You have to handle the ï¿½end of fileï¿½ condition (Ctrl+D)
  *
  * Task Simple shell 0.2 mandatory		Simple shell 0.1 +
  * 	*) Handle command lines with arguments (creo que es usando strtok y pasando los argumentos a execve)
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
  * Task Simple shell 0.4 mandatory		Simple shell 0.3 +
  * 	*) Implement the exit built-in, that exits the shell
  * 	*) Usage: exit
- * 	*) You don’t have to handle any argument to the built-in exit
+ * 	*) You donï¿½t have to handle any argument to the built-in exit
  *
  * Task Simple shell 1.0 mandatory		Simple shell 0.4 +
  * 	*) Implement the env built-in, that prints the current environment
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
  * 	*) You should have an AUTHORS file at the root of your repository, listing all individuals having contributed content to the repository. Format, see Docker
  *
  *
- * Información importante de los comandos resumida en este archivo:
+ * Informaciï¿½n importante de los comandos resumida en este archivo:
  * https://github.com/leocjj/0123/blob/master/0123C_files.txt
  *
  *

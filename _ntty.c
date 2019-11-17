@@ -2,9 +2,11 @@
 
 /**
  * _ntty - non-interactive. Receives input, calls the program then exits
+
  * @argv: arguments passed, name of executable file.
  *
  * Return: void
+
  */
 void _ntty(char *argv)
 {
@@ -32,5 +34,4 @@ void _ntty(char *argv)
 	}
 	else
 		printf("-%s: %s: No such file or directory\n", argv, command_line);
-
 }
