@@ -8,25 +8,26 @@
  */
 void _itty(char *argv)
 {
-	char *command_line = NULL;
-
+	char *command_line = NULL, *env, *saveptr;
 	char *args_for_execve[] = { "", NULL}, *new_env_vars[] = { NULL };
 	int file_found = -1, file_access = -1, wait_status;
-	struct stat st;
-
+	stat_t *head;
+	struct stat *st;
 	pid_t child_pid;
 
 	while (1)
 	{
 		printf("#MiniShell$ ");
 		_read(&command_line);
-
-		/**
-		 * Conditions to evaluate: command is found, command is executable by user.
-		 */
-		file_found = stat(command_line, &st);
+		env = _getenv("PATH");
+		while (file_found = stat(command_line, &st) < 0)
+		/* /\* { *\/ */
+		/* /\* 	if (stat(strtok_r(env, ":", &saveptr), &st) == 0) *\/ */
+		/* /\* 		file_found = 0; *\/ */
+		/* /\* 	env =  */ */saveptr;
+		}
 		file_access = access(command_line, F_OK | X_OK);
-		if (file_found >= 0)
+		if (file_found == 0)
 		{
 			if (file_access >= 0)
 			{
@@ -41,9 +42,11 @@ void _itty(char *argv)
 				} else
 					wait(&wait_status);
 			} else
-				printf("-%s: %s: Permission denied\n", argv, command_line);
+				printf("-%s: %s: Permission denied\n",
+				       argv, command_line);
 		}
 		else
-			printf("-%s: %s: No such file or directory\n", argv, command_line);
+			printf("-%s: %s: No such file or directory\n",
+			       argv, command_line);
 	}
 }
