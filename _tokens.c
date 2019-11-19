@@ -65,10 +65,10 @@ char **token_arguments(char *command_line)
 			return (NULL);
 
 		result[0] = strtok(command_line, s);
-		result[0] = "";
+		/*result[0] = "";*/
 		for (i = 0; result[i] != NULL; i++)
 			result[i + 1] = strtok(NULL, s);
-		result[number_of_tokens + 1] = NULL;
+		/*result[number_of_tokens + 1] = NULL;*/
 		return (result);
 	}
 }
