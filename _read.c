@@ -23,5 +23,8 @@ void _read(char **command_line)
 		;
 	(*command_line)[i] = '\0';
 	if (strcmp(*command_line, command_exit) == 0)
+	{
+		free (*command_line);
 		exit(EXIT_SUCCESS);
+	}
 }

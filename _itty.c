@@ -30,12 +30,12 @@ void _itty(char *argv)
 				{
 					execve(command_line, args_for_execve,
 					       new_env_vars);
-					free(command_line);
 				} else
 					wait(&wait_status);
 			} else
 				printf("-%s: %s: Permission denied\n",
 				       argv, command_line);
-		}
+	        }
+		free(command_line);
 	}
 }

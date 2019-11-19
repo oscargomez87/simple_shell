@@ -2,7 +2,7 @@
 
 int _findcmd(char **command_line, char *argv)
 {
-	char *env, *env_token, *command = *command_line;
+	char *env, *env_token, *command = NULL;
 
 	if (access(*command_line, F_OK) == 0)
 		return (0);
@@ -10,16 +10,20 @@ int _findcmd(char **command_line, char *argv)
 	env_token = strtok(env, ":");
 	while (env_token != NULL)
 	{
-		*command_line = malloc(strlen(command)
-				       + strlen(env_token) + 1);
-		strcpy(*command_line, env_token);
-		strcat(*command_line, "/");
-		strcat(*command_line, command);
-		if (access(*command_line, F_OK) == 0)
+		command = malloc(strlen(*command_line)
+				       + strlen(env_token) + 2);
+		strcpy(command, env_token);
+		strcat(command, "/");
+		strcat(command, *command_line);
+		if (access(command, F_OK) == 0)
+		{
+			free(*command_line);
+			*command_line = command;
 			return (0);
+		}
+		free(command);
 		env_token = strtok(NULL, ":");
 	}
-	*command_line = command;
 	printf("-%s: %s: No such file or directory\n",
 	       argv, *command_line);
 	return (-1);
