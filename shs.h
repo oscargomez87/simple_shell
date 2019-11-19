@@ -12,5 +12,7 @@
 void _ntty(char *);
 void _itty(char *);
 void _read(char **);
+char *token_command(char *command_line);
+char **token_arguments(char *command_line);
 
 #endif

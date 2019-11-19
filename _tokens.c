@@ -9,12 +9,12 @@
 char *token_command(char *command_line)
 {
 	int i = 0, command_size = 0;
-	int *result = NULL;
+	char *result = NULL;
 
 	if (command_line == NULL)
 		return (NULL);
 
-	for (i = 0; command_line)[i] != 32; i++)
+	for (i = 0; command_line[i] != 32; i++)
 		command_size++;
 
 	result = (char *) malloc((command_size + 1) * sizeof(char));
@@ -36,9 +36,12 @@ char *token_command(char *command_line)
  */
 char **token_arguments(char *command_line)
 {
-	int i = 0, , j = 0, number_of_tokens = 0;
-	int **result = {"", NULL};
+
+	char **result = {"", NULL};
+	(void) command_line;
 /*
+	int i = 0, j = 0, number_of_tokens = 0;
+
 	for (i = 0; (*command_line)[i] != '\0'; i++)
 		if ((*command_line)[i] == 32)
 			number_of_tokens++;
