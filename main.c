@@ -8,7 +8,7 @@
  *
  * Return: 20 if too many arguments, 0 successfully ended.
  */
-int main(int argc, char **argv, char **a)
+int main(int argc, char **argv)
 {
 	if (argc == 1)
 	{
