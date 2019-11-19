@@ -9,7 +9,7 @@
 void _itty(char *argv)
 {
 	char *command_line = NULL, *command_for_execve = NULL;
-	char *args_for_execve, *new_env_vars;
+	char *args_for_execve[] = { "", NULL}, *new_env_vars;
 	int file_found = -1, file_access = -1, wait_status;
 	struct stat st;
 	pid_t child_pid;
