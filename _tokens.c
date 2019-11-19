@@ -37,7 +37,7 @@ char *token_command(char *command_line)
 char **token_arguments(char *command_line)
 {
 
-	char **result = {"", NULL};
+	char *result[] = {"", NULL};
 	(void) command_line;
 /*
 	int i = 0, j = 0, number_of_tokens = 0;
