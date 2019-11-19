@@ -34,40 +34,41 @@ char *token_command(char *command_line)
  *
  * Return: void.
  */
-void token_arguments(char *command_line, char *args_for_execve[])
+char **token_arguments(char *command_line)
 {
-	(void) command_line;
-	args_for_execve[] = {"", NULL};
-/*
-	int i = 0, j = 0, number_of_tokens = 0;
-
-	for (i = 0; (*command_line)[i] != '\0'; i++)
-		if ((*command_line)[i] == 32)
-			number_of_tokens++;
-
+	int i = 0, number_of_tokens = 0;
+	const char s[7] = " \t\r\n\v\f";
+	char **result;
 
 	if (command_line == NULL)
 		return (NULL);
 
-	result = malloc(height * sizeof(int *));
-	if (result == NULL)
-		return (NULL);
+	for (i = 0; command_line[i] != '\0'; i++)
+		if (command_line[i] == 32)
+			number_of_tokens++;
 
-	for (i = 0; i < height; i++)
+	if (number_of_tokens == 0)
 	{
-		result[i] = malloc(width * sizeof(int));
-		if (result[i] == NULL)
-		{
-			for (j = 0; j <= i; j++)
-				free(result[j]);
-			free(result);
+		result = malloc(2 * sizeof(char *));
+		if (result == NULL)
 			return (NULL);
-		}
+		result[0] = malloc(1 * sizeof(char *));
+		result[1] = malloc(1 * sizeof(char *));
+		result[0] = "";
+		result[1] = NULL;
+		return (result);
 	}
-	for (i = 0; i < height; i++)
-		for (j = 0; j < width; j++)
-			result[i][j] = 0;
+	else
+	{
+		result = malloc((number_of_tokens + 2) * sizeof(char *));
+		if (result == NULL)
+			return (NULL);
 
-	return (result);
-*/
+		result[0] = strtok(command_line, s);
+		result[0] = "";
+		for (i = 0; result[i] != NULL; i++)
+			result[i + 1] = strtok(NULL, s);
+		result[number_of_tokens + 1] = NULL;
+		return (result);
+	}
 }

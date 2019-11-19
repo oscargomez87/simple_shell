@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
-//#include <sys/wait.h>
+#include <sys/wait.h>
 #include <sys/stat.h>
 #include <string.h>
 
@@ -13,6 +13,6 @@ void _ntty(char *);
 void _itty(char *);
 void _read(char **);
 char *token_command(char *command_line);
-void token_arguments(char *command_line, char *args_for_execve[]);
+char **token_arguments(char *command_line);
 
 #endif
