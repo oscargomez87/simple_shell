@@ -69,6 +69,6 @@ char **token_arguments(char *command_line)
 	for (i = 0; i < height; i++)
 		for (j = 0; j < width; j++)
 			result[i][j] = 0;
-			*/
+
 	return (result);
-}
+}*/
