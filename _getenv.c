@@ -19,7 +19,8 @@ char *_getenv(char *s)
 			s++;
 		}
 		if (*(*environ) == '=')
-			return ((*environ)++);
+			return (++(*environ));
+		environ++;
 	}
 	return (NULL);
 }
