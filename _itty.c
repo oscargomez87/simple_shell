@@ -35,7 +35,7 @@ void _itty(char *argv)
 					execve(command_for_execve, args_for_execve, new_env_vars);
 					free(command_line);
 					free(command_for_execve);
-					free(args_for_execve);
+					/*free(args_for_execve);*/
 				} else
 					wait(&wait_status);
 			} else
