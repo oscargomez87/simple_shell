@@ -19,7 +19,7 @@ void _itty(char *argv)
 		printf("#MiniShell$ ");
 		_read(&command_line);
 		command_for_execve = token_command(command_line);
-		args_for_execve = token_arguments(command_line);
+		/*args_for_execve = token_arguments(command_line);*/
 
 		file_found = stat(command_for_execve, &st);
 		file_access = access(command_for_execve, F_OK | X_OK);
