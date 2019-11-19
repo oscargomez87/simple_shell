@@ -16,5 +16,7 @@ typedef struct stat_s{
 void _ntty(char *);
 void _itty(char *);
 void _read(char **);
+char *_getenv(char *);
+int _findcmd(char **, char *);
 
 #endif
