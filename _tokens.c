@@ -34,13 +34,11 @@ char *token_command(char *command_line)
  *
  * Return: void.
  */
-/*
-char **token_arguments(char *command_line)
+void token_arguments(char *command_line, char *args_for_execve[])
 {
-
-	char *result[] = {"", NULL};
 	(void) command_line;
-
+	args_for_execve[] = {"", NULL};
+/*
 	int i = 0, j = 0, number_of_tokens = 0;
 
 	for (i = 0; (*command_line)[i] != '\0'; i++)
@@ -71,4 +69,5 @@ char **token_arguments(char *command_line)
 			result[i][j] = 0;
 
 	return (result);
-}*/
+*/
+}
