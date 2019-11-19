@@ -14,7 +14,7 @@ char *token_command(char *command_line)
 	if (command_line == NULL)
 		return (NULL);
 
-	for (i = 0; command_line[i] != 32; i++)
+	for (i = 0; command_line[i] != 32 && command_line[i] != '\0'; i++)
 		command_size++;
 
 	result = (char *) malloc((command_size + 1) * sizeof(char));
