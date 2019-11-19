@@ -9,7 +9,7 @@
 void _itty(char *argv)
 {
 	char *command_line = NULL, *command_for_execve = NULL;
-	char *args_for_execve[] = { "", NULL}, *new_env_vars[] = { NULL };
+	char *args_for_execve[], *new_env_vars[] = { NULL };
 	int file_found = -1, file_access = -1, wait_status;
 	struct stat st;
 	pid_t child_pid;
@@ -19,7 +19,7 @@ void _itty(char *argv)
 		printf("#MiniShell$ ");
 		_read(&command_line);
 		command_for_execve = token_command(command_line);
-		/*args_for_execve = token_arguments(command_line);*/
+		args_for_execve = token_arguments(command_line, &args_for_execve[]);
 
 		file_found = stat(command_for_execve, &st);
 		file_access = access(command_for_execve, F_OK | X_OK);
