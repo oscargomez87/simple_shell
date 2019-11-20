@@ -2,48 +2,40 @@
 
 /**
  * _itty - Interactive, waits for input then calls program if it is found.
- * @argv: parameters received from main(), name of the application.
  *
- * Return: void.
+ * @argv: parameters received from main(), name of the application.
  */
 void _itty(char *argv)
 {
-	char *command_line = NULL, *command_for_execve = NULL;
-	char *new_env_vars[] = { NULL };
-	/*char *arguments_for_execve[] = {"", "-l", NULL};*/
+	char *command_line = NULL, *env = NULL, *command_for_execve = NULL;
 	char **arguments_for_execve;
-	int file_found = -1, file_access = -1, wait_status;
-	struct stat st;
-	pid_t child_pid;
+	int file_access = -1;
 
 	while (1)
 	{
 		printf("#MiniShell$ ");
-		_read(&command_line);
+		if (env == NULL)
+			env = _getenv("PATH");
+		_read(&command_line, &env);
+		if (command_line == NULL)
+			continue;
 		command_for_execve = token_command(command_line);
 		arguments_for_execve = token_arguments(command_line);
-
-		file_found = stat(command_for_execve, &st);
-		file_access = access(command_for_execve, F_OK | X_OK);
-		if (file_found >= 0)
+		file_access = _findcmd(&command_for_execve, argv, env);
+		if (file_access == 0)
 		{
-			if (file_access >= 0)
+			file_access = access(command_for_execve, X_OK);
+			if (file_access == 0)
 			{
-				child_pid = fork();
-				if (child_pid == -1)
-					exit(1);
-				if (child_pid == 0)
-				{
-					execve(command_for_execve, arguments_for_execve, new_env_vars);
-					free(command_line);
-					free(command_for_execve);
-					/*free(args_for_execve);*/
-				} else
-					wait(&wait_status);
+				_exec(command_for_execve,
+				  arguments_for_execve);
 			} else
-				printf("-%s: %s: Permission denied\n", argv, command_for_execve);
+			{
+				printf("%s: %s: Permission denied\n",
+				       argv, command_for_execve);
+			}
 		}
-		else
-			printf("-%s: %s: No such file or directory\n", argv, command_for_execve);
+		free(command_for_execve);
+		free(arguments_for_execve);
 	}
 }
