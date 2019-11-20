@@ -9,18 +9,20 @@
  */
 char *_getenv(char *s)
 {
-	extern char **environ;
+	int i, j;
+	char *env;
 
-	while (*environ != NULL)
+	for (i = 0; environ[i] != NULL; i++)
 	{
-		while (*(*environ) == *s)
+		for (j = 0; environ[i][j] == s[j]; j++)
+			;
+		if (environ[i][j] == '=')
 		{
-			(*environ)++;
-			s++;
+			j++;
+			env = malloc(strlen(&(environ[i][j])) + 1);
+			strcpy(env, &(environ[i][j]));
+			return (env);
 		}
-		if (*(*environ) == '=')
-			return (++(*environ));
-		environ++;
 	}
 	return (NULL);
 }
