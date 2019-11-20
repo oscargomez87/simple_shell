@@ -8,9 +8,9 @@
  * @argv: Name of program, used in error printing
  * Return: 0 if command is found, -1 otherwise
  */
-int _findcmd(char **command_line, char *argv)
+int _findcmd(char **command_line, char *argv, char *env)
 {
-	char *env, *env_token, *command = NULL;
+	char *env_token, *command = NULL, *envcp = NULL;
 
 	if (access(*command_line, F_OK) == 0)
 		return (0);
@@ -20,8 +20,9 @@ int _findcmd(char **command_line, char *argv)
 		       argv, *command_line);
 		return (-1);
 	}
-	env = _getenv("PATH");
-	env_token = strtok(env, ":");
+	envcp = malloc(strlen(env) + 1);
+	strcpy(envcp, env);
+	env_token = strtok(envcp, ":");
 	while (env_token != NULL)
 	{
 		command = malloc(strlen(*command_line)
@@ -31,15 +32,15 @@ int _findcmd(char **command_line, char *argv)
 		strcat(command, *command_line);
 		if (access(command, F_OK) == 0)
 		{
-			free(env);
 			free(*command_line);
+			free(envcp);
 			*command_line = command;
 			return (0);
 		}
 		free(command);
 		env_token = strtok(NULL, ":");
 	}
-	free(env);
+	free(envcp);
 	printf("%s: %s: No such file or directory\n",
 	       argv, *command_line);
 	return (-1);
