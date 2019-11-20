@@ -9,14 +9,13 @@
 #include <sys/stat.h>
 #include <string.h>
 
-typedef struct stat_s{
-	char *data;
-	struct stat_s *next;
-}stat_t;
+extern char **environ;
+
 void _ntty(char *);
 void _itty(char *);
-void _read(char **);
+void _exec( char *);
+void _read(char **, char **);
 char *_getenv(char *);
-int _findcmd(char **, char *);
+int _findcmd(char **, char *, char *);
 
 #endif
