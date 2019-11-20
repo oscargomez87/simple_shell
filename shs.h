@@ -13,9 +13,11 @@ extern char **environ;
 
 void _ntty(char *);
 void _itty(char *);
-void _exec( char *);
+void _exec( char *, char **);
 void _read(char **, char **);
 char *_getenv(char *);
 int _findcmd(char **, char *, char *);
+char *token_command(char *command_line);
+char **token_arguments(char *command_line);
 
 #endif
