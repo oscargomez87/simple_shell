@@ -31,6 +31,7 @@ int _findcmd(char **command_line, char *argv)
 		strcat(command, *command_line);
 		if (access(command, F_OK) == 0)
 		{
+			free(env);
 			free(*command_line);
 			*command_line = command;
 			return (0);
@@ -38,6 +39,7 @@ int _findcmd(char **command_line, char *argv)
 		free(command);
 		env_token = strtok(NULL, ":");
 	}
+	free(env);
 	printf("%s: %s: No such file or directory\n",
 	       argv, *command_line);
 	return (-1);
