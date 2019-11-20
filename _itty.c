@@ -21,7 +21,6 @@ void _itty(char *argv)
 			continue;
 		command_for_execve = token_command(command_line);
 		arguments_for_execve = token_arguments(command_line);
-		free(command_line);
 		file_access = _findcmd(&command_for_execve, argv, env);
 		if (file_access == 0)
 		{
