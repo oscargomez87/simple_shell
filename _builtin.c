@@ -7,12 +7,12 @@
  * Return: void.
  */
 
-void print_env(char **env)
+void print_env()
 {
 	int i = 0;
-	while(*(env + i) != NULL)
+	while(*(environ + i) != NULL)
 	{
-		printf("%s\n",*(env + i));
+		printf("%s\n",*(environ + i));
 		i++;
 	}
 }
