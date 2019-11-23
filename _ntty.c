@@ -9,26 +9,31 @@
  */
 void _ntty(char *argv)
 {
-	char *command_line = NULL, *env = NULL;
-	char *args_for_execve[] = { "", NULL}, *new_env_vars[] = { NULL };
+	char *command_line = NULL, *env = NULL, *command_for_execve = NULL;
+	char **arguments_for_execve;
 	int file_access = -1;
 
 	env = _getenv("PATH");
 	_read(&command_line, &env);
 	if (command_line == NULL)
 		return;
-	file_access = _findcmd(&command_line, argv, env);
+	command_for_execve = token_command(command_line);
+	arguments_for_execve = token_arguments(command_line);
+	file_access = _findcmd(&command_for_execve, argv, env);
+
 	if (file_access == 0)
 	{
-		file_access = access(command_line, X_OK);
+		file_access = access(command_for_execve, X_OK);
 		if (file_access == 0)
 		{
-			execve(command_line, args_for_execve, new_env_vars);
-			free(command_line);
+			_exec(command_for_execve,
+			  arguments_for_execve);
+		} else
+		{
+			printf("%s: %s: Permission denied\n",
+				   argv, command_for_execve);
 		}
-		else
-			printf("-%s: %s: Permission denied\n",
-			       argv, command_line);
 	}
-	free(command_line);
+	free(command_for_execve);
+	free(arguments_for_execve);
 }
