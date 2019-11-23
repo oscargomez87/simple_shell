@@ -9,7 +9,7 @@
 void _read(char **command_line, char **env)
 {
 	int i = 0;
-	char *command_exit = "exit";
+	char *command_exit = "exit", *command_env ="env";
 	size_t len_of_command = 0;
 	ssize_t len_of_read;
 
@@ -35,4 +35,6 @@ void _read(char **command_line, char **env)
 		free(*env);
 		exit(EXIT_SUCCESS);
 	}
+	if (strcmp(*command_line, command_env) == 0)
+        print_env(env);
 }
