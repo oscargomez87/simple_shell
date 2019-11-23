@@ -19,6 +19,6 @@ char *_getenv(char *);
 int _findcmd(char **, char *, char *);
 char *token_command(char *command_line);
 char **token_arguments(char *command_line);
-void print_env(char **env);
+void print_env();
 
 #endif
