@@ -4,44 +4,38 @@
  * _findcmd - finds the command adquired from input,
  * searching PATH in case is not a full path
  *
- * @command_line: command to find.
+ * @pinput: User input.
  * @argv: Name of program, used in error printing
- * Return: 0 if command is found, -1 otherwise
+ * @env: string with PATH value
+ * @errorc: error count
+ * Return: -1 if pinput is found but is a directory,
+ * -2 if pinput can't be found, 0 otherwise
  */
-int _findcmd(char **command_line, char *argv, char *env)
+int _findcmd(char **pinput, char *argv, char *env, int *errorc)
 {
 	char *env_token, *command = NULL, *envcp = NULL;
+	struct stat sb;
 
-	if (access(*command_line, F_OK) == 0)
-		return (0);
-	if (**command_line == '/')
+	if (access(*pinput, F_OK) == 0)
 	{
-		printf("%s: %s: No such file or directory\n",
-		       argv, *command_line);
-		return (-1);
+		stat(*pinput, &sb);
+		if ((sb.st_mode & S_IFMT) == S_IFDIR)
+			return (-1);
+		else if  ((sb.st_mode & S_IFMT) == S_IFREG)
+			return (0);
 	}
 	envcp = malloc(strlen(env) + 1);
+	if (envcp == NULL)
+		return (-1);
 	strcpy(envcp, env);
 	env_token = strtok(envcp, ":");
-	while (env_token != NULL)
+	if (_getpath(&command, env_token, pinput) == 0)
 	{
-		command = malloc(strlen(*command_line)
-				       + strlen(env_token) + 2);
-		strcpy(command, env_token);
-		strcat(command, "/");
-		strcat(command, *command_line);
-		if (access(command, F_OK) == 0)
-		{
-			free(*command_line);
-			free(envcp);
-			*command_line = command;
-			return (0);
-		}
-		free(command);
-		env_token = strtok(NULL, ":");
+		free(envcp);
+		return (0);
 	}
-	free(envcp);
-	printf("%s: %s: No such file or directory\n",
-	       argv, *command_line);
-	return (-1);
+	(*errorc)++;
+	printf("%s: %d: %s: not found\n",
+	       argv, *errorc, *pinput);
+	return (-2);
 }
