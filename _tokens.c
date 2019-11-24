@@ -11,9 +11,6 @@ char *token_command(char *command_line)
 	int i = 0, command_size = 0;
 	char *result = NULL;
 
-	if (command_line == NULL)
-		return (NULL);
-
 	for (i = 0; command_line[i] != 32 && command_line[i] != '\0'; i++)
 		command_size++;
 
