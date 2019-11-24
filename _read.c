@@ -2,39 +2,37 @@
 
 /**
  * _read - Reads STDIN then saves it in a pointer removing NL
- * @command_line: pointer to save string in.
  *
+ * @pinput: pointer to save string in.
+ * @env: pointer to string with PATH values
  * Return: void.
  */
-void _read(char **command_line, char **env)
+void _read(char **pinput, char **env)
 {
-	int i = 0;
-	char *command_exit = "exit", *command_env ="env";
-	size_t len_of_command = 0;
-	ssize_t len_of_read;
+	char *command_exit = "exit", *command_env = "env";
+	size_t input_len = 0;
+	ssize_t cmd_len;
 
-	len_of_read = getline(&(*command_line), &len_of_command, stdin);
-	if (len_of_read == -1)
+	cmd_len = getline(&(*pinput), &input_len, stdin);
+	if (cmd_len == -1)
 	{
 		free(*env);
 		printf("\n");
 		exit(EXIT_SUCCESS);
 	}
-	for (i = 0; (*command_line)[i] != '\n'; i++)
-		;
-	(*command_line)[i] = '\0';
-	if (*command_line[0] == '\0')
+	if (cmd_len == 1)
 	{
-		free(*command_line);
-		*command_line = NULL;
+		free(*pinput);
+		*pinput = NULL;
 		return;
 	}
-	if (strcmp(*command_line, command_exit) == 0)
+	(*pinput)[cmd_len - 1] = '\0';
+	if (strcmp(*pinput, command_exit) == 0)
 	{
-		free(*command_line);
 		free(*env);
+		free(*pinput);
 		exit(EXIT_SUCCESS);
 	}
-	if (strcmp(*command_line, command_env) == 0)
-        print_env(env);
+	if (strcmp(*pinput, command_env) == 0)
+		print_env(env);
 }
