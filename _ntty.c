@@ -31,13 +31,22 @@ void _ntty(char *argv)
 			errorc++;
 			printf("%s: %d: %s: Permission denied\n",
 			       argv, errorc, command);
+			free(env);
+			_free_all(pinput, cmd_arg, command);
+			exit(126);
 		}
 	} else if (file_access == -1)
 	{
 		errorc++;
 		printf("%s: %d: %s: Permission denied\n",
 		       argv, errorc, command);
+		free(env);
+		_free_all(pinput, cmd_arg, command);
+		exit(126);
+	} else if (file_access == 127)
+	{
+		free(env);
+		_free_all(pinput, cmd_arg, command);
+		exit(127);
 	}
-	free(env);
-	_free_all(pinput, cmd_arg, command);
 }
