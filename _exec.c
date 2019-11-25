@@ -9,7 +9,7 @@
  */
 void _exec(char *command, char **cmd_arg, char *exit_c)
 {
-	char *command_exit = "exit", *command_env = "env";
+	char *command_exit = "exit";
 	pid_t child_pid;
 	int wait_status;
 
@@ -17,7 +17,7 @@ void _exec(char *command, char **cmd_arg, char *exit_c)
 	{
 		/*free(*env);
 		free(*pinput);*/
-		exit(*(cmd_arg + 1);
+		exit(*(cmd_arg + 1));
 	}
 	/*if (strcmp(*command, command_env) == 0 && cmd_arg)
 			print_env(env);*/
