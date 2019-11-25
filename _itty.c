@@ -16,12 +16,17 @@ void _itty(char *argv)
 		printf("$ ");
 		if (env == NULL)
 			env = _getenv("PATH");
-		_read(&pinput, &env);
+		if (exit_c == NULL)
+		{
+			exit_c = malloc(4 * sizeof(char));
+			exit_c[0] = 0 + '0';
+			exit_c[1] = '\0';
+		}
+		_read(&pinput, &env, exit_c);
 		if (pinput == NULL)
 			continue;
 		command = token_command(pinput);
 		cmd_arg = token_arguments(pinput, exit_c);
-		exit_c = malloc(4 * sizeof(char));
 		file_access = _findcmd(&command, argv, env, &errorc);
 		if (file_access == 0)
 		{

@@ -15,7 +15,7 @@ void _ntty(char *);
 void _itty(char *);
 void _exec( char *, char **, char *);
 void _itoa(int, char *);
-void _read(char **, char **);
+void _read(char **, char **, char *);
 char *_getenv(char *);
 int _findcmd(char **, char *, char *, int *);
 char *token_command(char *);

@@ -7,7 +7,7 @@
  * @env: pointer to string with PATH values
  * Return: void.
  */
-void _read(char **pinput, char **env)
+void _read(char **pinput, char **env, char *exit_c)
 {
 	char *command_exit = "exit", *command_env = "env";
 	size_t input_len = 0;
@@ -31,6 +31,7 @@ void _read(char **pinput, char **env)
 	{
 		free(*env);
 		free(*pinput);
+		free(exit_c);
 		exit(EXIT_SUCCESS);
 	}
 	if (strcmp(*pinput, command_env) == 0)
