@@ -37,5 +37,5 @@ int _findcmd(char **pinput, char *argv, char *env, int *errorc)
 	(*errorc)++;
 	printf("%s: %d: %s: not found\n",
 	       argv, *errorc, *pinput);
-	return (-2);
+	return (127);
 }

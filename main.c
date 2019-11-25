@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	} else
 	{
 		printf("Too many arguments\n");
-		return (20);
+		return (128);
 	}
 	return (0);
 }
