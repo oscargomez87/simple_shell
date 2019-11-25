@@ -9,19 +9,9 @@
  */
 void _exec(char *command, char **cmd_arg, char *exit_c)
 {
-	char *command_exit = "exit";
 	pid_t child_pid;
-	int wait_status, e = 0;
+	int wait_status;
 
-	if (strcmp(command, command_exit) == 0)
-	{
-		/*free(*env);
-		free(*pinput);*/
-		e = atoi(*(cmd_arg + 1));
-		exit(e);
-	}
-	/*if (strcmp(*command, command_env) == 0 && cmd_arg)
-			print_env(env);*/
 	child_pid = fork();
 	if (child_pid == -1)
 		exit(1);

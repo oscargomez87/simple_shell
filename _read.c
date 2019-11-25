@@ -9,6 +9,7 @@
  */
 void _read(char **pinput, char **env)
 {
+	char *command_exit = "exit", *command_env = "env";
 	size_t input_len = 0;
 	ssize_t cmd_len;
 
@@ -26,4 +27,12 @@ void _read(char **pinput, char **env)
 		return;
 	}
 	(*pinput)[cmd_len - 1] = '\0';
+	if (strcmp(*pinput, command_exit) == 0)
+	{
+		free(*env);
+		free(*pinput);
+		exit(EXIT_SUCCESS);
+	}
+	if (strcmp(*pinput, command_env) == 0)
+		print_env(env);
 }
