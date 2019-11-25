@@ -11,13 +11,14 @@ void _exec(char *command, char **cmd_arg, char *exit_c)
 {
 	char *command_exit = "exit";
 	pid_t child_pid;
-	int wait_status;
+	int wait_status, e = 0;
 
 	if (strcmp(command, command_exit) == 0)
 	{
 		/*free(*env);
 		free(*pinput);*/
-		exit(atoi(*(cmd_arg + 1)));
+		e = atoi(*(cmd_arg + 1))
+		exit(e);
 	}
 	/*if (strcmp(*command, command_env) == 0 && cmd_arg)
 			print_env(env);*/
