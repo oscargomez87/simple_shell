@@ -21,6 +21,6 @@ char *token_command(char *);
 char **token_arguments(char *);
 void print_env();
 void _free_all(char *, char **, char *);
-int _getpath(char **, char *, char **);
+int _getpath(char **, char *);
 
 #endif
