@@ -17,7 +17,7 @@ void _exec(char *command, char **cmd_arg, char *exit_c)
 	{
 		/*free(*env);
 		free(*pinput);*/
-		exit(*(cmd_arg + 1));
+		exit(atoi(*(cmd_arg + 1));
 	}
 	/*if (strcmp(*command, command_env) == 0 && cmd_arg)
 			print_env(env);*/
