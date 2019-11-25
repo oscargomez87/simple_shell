@@ -13,7 +13,7 @@ void _exec(char *command, char **cmd_arg, char *exit_c)
 	pid_t child_pid;
 	int wait_status;
 
-	if (strcmp(*command, command_exit) == 0)
+	if (strcmp(command, command_exit) == 0)
 	{
 		/*free(*env);
 		free(*pinput);*/
