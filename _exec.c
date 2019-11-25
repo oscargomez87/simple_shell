@@ -7,7 +7,7 @@
  * @command: Command to execute with execve
  * @cmd_arg: Arguments for command to execute
  */
-void _exec(char *command, char **cmd_arg)
+void _exec(char *command, char **cmd_arg, char *exit_c)
 {
 	pid_t child_pid;
 	int wait_status;
@@ -19,5 +19,27 @@ void _exec(char *command, char **cmd_arg)
 	{
 		execve(command, cmd_arg, NULL);
 	} else
+	{
 		wait(&wait_status);
+		if (WIFEXITED(wait_status))
+		{
+			wait_status = WEXITSTATUS(wait_status);
+			_itoa(wait_status, exit_c);
+		}
+	}
+}
+
+void _itoa(int wait_status, char *s)
+{
+	int i, status;
+
+	status = wait_status;
+	for (i = 0; status / 10 != 0; i++)
+		status = status / 10;
+	s[i + 1] = '\0';
+	for (; i >= 0; i--)
+	{
+		s[i] = (wait_status % 10) + '0';
+		wait_status = wait_status / 10;
+	}
 }
