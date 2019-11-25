@@ -13,7 +13,7 @@
  */
 int _findcmd(char **pinput, char *argv, char *env, int *errorc)
 {
-	char *env_token, *command = NULL, *envcp = NULL;
+	char *envcp = NULL;
 	struct stat sb;
 
 	if (access(*pinput, F_OK) == 0)
@@ -28,12 +28,12 @@ int _findcmd(char **pinput, char *argv, char *env, int *errorc)
 	if (envcp == NULL)
 		return (-1);
 	strcpy(envcp, env);
-	env_token = strtok(envcp, ":");
-	if (_getpath(&command, env_token, pinput) == 0)
+	if (_getpath(pinput, envcp) == 0)
 	{
 		free(envcp);
 		return (0);
 	}
+	free(envcp);
 	(*errorc)++;
 	printf("%s: %d: %s: not found\n",
 	       argv, *errorc, *pinput);
