@@ -13,19 +13,19 @@ void _exec(char *command, char **cmd_arg, char *exit_c)
 	pid_t child_pid;
 	int wait_status;
 
+	if (strcmp(*command, command_exit) == 0)
+	{
+		/*free(*env);
+		free(*pinput);*/
+		exit(*(cmd_arg + 1);
+	}
+	/*if (strcmp(*command, command_env) == 0 && cmd_arg)
+			print_env(env);*/
 	child_pid = fork();
 	if (child_pid == -1)
 		exit(1);
 	if (child_pid == 0)
 	{
-		if (strcmp(*command, command_exit) == 0)
-		{
-			/*free(*env);
-			free(*pinput);*/
-			exit(*(cmd_arg + 1);
-		}
-		if (strcmp(*command, command_env) == 0)
-			print_env(env);
 		execve(command, cmd_arg, NULL);
 	} else
 	{
