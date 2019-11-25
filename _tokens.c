@@ -29,9 +29,10 @@ char *token_command(char *command_line)
  *
  * Return: void.
  */
-char **token_arguments(char *command_line)
+char **token_arguments(char *command_line, char *exit_c)
 {
 	int i = 0, number_of_tokens = 0;
+	char *exvar = "$?";
 	const char s[7] = " \t\r\n\v\f";
 	char **result;
 
@@ -43,6 +44,13 @@ char **token_arguments(char *command_line)
 		return (NULL);
 	result[0] = strtok(command_line, s);
 	for (i = 0; result[i] != NULL; i++)
+	{
 		result[i + 1] = strtok(NULL, s);
+		if (result[i + 1] != NULL)
+		{
+			if (strcmp(result[i + 1], exvar) == 0 )
+				result[i + 1] = exit_c;
+		}
+	}
 	return (result);
 }
