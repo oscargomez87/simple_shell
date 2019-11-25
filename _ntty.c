@@ -9,31 +9,35 @@
  */
 void _ntty(char *argv)
 {
-	char *command_line = NULL, *env = NULL, *command_for_execve = NULL;
-	char **arguments_for_execve;
-	int file_access = -1;
+	char *pinput = NULL, *env = NULL, *command = NULL;
+	char **cmd_arg;
+	int file_access, errorc = 0;
 
 	env = _getenv("PATH");
-	_read(&command_line, &env);
-	if (command_line == NULL)
+	_read(&pinput, &env);
+	if (pinput == NULL)
 		return;
-	command_for_execve = token_command(command_line);
-	arguments_for_execve = token_arguments(command_line);
-	file_access = _findcmd(&command_for_execve, argv, env);
-
+	command = token_command(pinput);
+	cmd_arg = token_arguments(pinput);
+	file_access = _findcmd(&command, argv, env, &errorc);
 	if (file_access == 0)
 	{
-		file_access = access(command_for_execve, X_OK);
+		file_access = access(command, X_OK);
 		if (file_access == 0)
 		{
-			_exec(command_for_execve,
-			  arguments_for_execve);
+			_exec(command, cmd_arg);
 		} else
 		{
-			printf("%s: %s: Permission denied\n",
-				   argv, command_for_execve);
+			errorc++;
+			printf("%s: %d: %s: Permission denied\n",
+			       argv, errorc, command);
 		}
+	} else if (file_access == -1)
+	{
+		errorc++;
+		printf("%s: %d: %s: Permission denied\n",
+		       argv, errorc, command);
 	}
-	free(command_for_execve);
-	free(arguments_for_execve);
+	free(env);
+	_free_all(pinput, cmd_arg, command);
 }

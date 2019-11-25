@@ -2,17 +2,17 @@
 
 /**
  * print_env - print the actual environment.
- * @env: environment variables.
  *
  * Return: void.
  */
 
-void print_env()
+void print_env(void)
 {
 	int i = 0;
-	while(*(environ + i) != NULL)
+
+	while (*(environ + i) != NULL)
 	{
-		printf("%s\n",*(environ + i));
+		printf("%s\n", *(environ + i));
 		i++;
 	}
 }

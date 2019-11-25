@@ -16,9 +16,11 @@ void _itty(char *);
 void _exec( char *, char **);
 void _read(char **, char **);
 char *_getenv(char *);
-int _findcmd(char **, char *, char *);
-char *token_command(char *command_line);
-char **token_arguments(char *command_line);
+int _findcmd(char **, char *, char *, int *);
+char *token_command(char *);
+char **token_arguments(char *);
 void print_env();
+void _free_all(char *, char **, char *);
+int _getpath(char **, char *, char **);
 
 #endif
