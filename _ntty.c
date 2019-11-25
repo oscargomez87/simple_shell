@@ -19,6 +19,7 @@ void _ntty(char *argv)
 		return;
 	command = token_command(pinput);
 	cmd_arg = token_arguments(pinput, exit_c);
+	exit_c = malloc(4 * sizeof(char));
 	file_access = _findcmd(&command, argv, env, &errorc);
 	if (file_access == 0)
 	{
