@@ -48,7 +48,7 @@ char **token_arguments(char *command_line, char *exit_c)
 		result[i + 1] = strtok(NULL, s);
 		if (result[i + 1] != NULL)
 		{
-			if (strcmp(result[i + 1], exvar) == 0 )
+			if (strcmp(result[i + 1], exvar) == 0)
 				result[i + 1] = exit_c;
 		}
 	}

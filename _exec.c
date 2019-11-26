@@ -7,7 +7,7 @@
  * @command: Command to execute with execve
  * @cmd_arg: Arguments for command to execute
  */
-void _exec(char *command, char **cmd_arg, char *exit_c)
+void _exec(char *command, char **cmd_arg, char *exit_c, int *cmd_count)
 {
 	pid_t child_pid;
 	int wait_status;
@@ -21,6 +21,7 @@ void _exec(char *command, char **cmd_arg, char *exit_c)
 	} else
 	{
 		wait(&wait_status);
+		(*cmd_count)++;
 		if (WIFEXITED(wait_status))
 		{
 			wait_status = WEXITSTATUS(wait_status);

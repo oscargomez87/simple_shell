@@ -26,3 +26,10 @@ char *_getenv(char *s)
 	}
 	return (NULL);
 }
+
+void ecodeinit(char **exit_c)
+{
+	*exit_c = malloc(4 * sizeof(char));
+	(*exit_c)[0] = 0 + '0';
+	(*exit_c)[1] = '\0';
+}
