@@ -39,7 +39,7 @@ void _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 	}
 	if (strcmp(*pinput, command_env) == 0)
 	{
-		print_env(env);
+		print_env();
 		(*cmd_count)++;
 	}
 }
