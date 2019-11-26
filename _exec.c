@@ -19,7 +19,7 @@ void _exec(char *command, char **cmd_arg, char *exit_c, int *cmd_count)
 		exit(1);
 	if (child_pid == 0)
 	{
-		execve(command, cmd_arg, NULL);
+		execve(command, cmd_arg, environ);
 		free(command);
 		free(*cmd_arg);
 		free(exit_c);
