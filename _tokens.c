@@ -26,7 +26,7 @@ char *token_command(char *command_line)
 /**
  * token_arguments - Reads STDIN then saves it in a pointer removing NL
  * @command_line: pointer to save string in.
- *
+ * @exit_c: Variable that stores exit code
  * Return: void.
  */
 char **token_arguments(char *command_line, char *exit_c)

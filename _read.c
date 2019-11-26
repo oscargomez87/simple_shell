@@ -5,6 +5,8 @@
  *
  * @pinput: pointer to save string in.
  * @env: pointer to string with PATH values
+ * @cmd_count: Commands issued counter
+ * @exit_c: Variable that stores exit codes
  * Return: void.
  */
 void _read(char **pinput, char **env, int *cmd_count, char *exit_c)

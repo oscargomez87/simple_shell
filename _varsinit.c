@@ -44,9 +44,8 @@ void ecodeinit(char **exit_c)
  * _getpath - checks if user input can be found in the PATH,
  * then stores it
  *
- * @fullcommand: temp variable to store the PATH + command
- * @env_token: variable to store separated path directories
  * @command: command entered by user
+ * @envcp: copy of environment
  * Return: 0 if command is found in directory path, -1 otherwise
  */
 int _getpath(char **command, char *envcp)
