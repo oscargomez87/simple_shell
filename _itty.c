@@ -28,9 +28,7 @@ void _itty(char *argv)
 		{
 			file_access = access(command, X_OK);
 			if (file_access == 0)
-			{
 				_exec(command, cmd_arg, exit_c, &cmd_count);
-			}
 		}
 		if (file_access == -1)
 			pdeniederr(&cmd_count, argv, command, exit_c);

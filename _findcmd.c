@@ -5,9 +5,7 @@
  * searching PATH in case is not a full path
  *
  * @pinput: User input.
- * @argv: Name of program, used in error printing
  * @env: string with PATH value
- * @errorc: error count
  * Return: -1 if pinput is found but is a directory,
  * 127 if pinput can't be found in PATH, 0 otherwise
  */
