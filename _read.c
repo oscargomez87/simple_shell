@@ -7,9 +7,11 @@
  * @env: pointer to string with PATH values
  * @cmd_count: Commands issued counter
  * @exit_c: pointer to string with exit code
+ * @ppid: pointer to string with the process ID
  * Return: void.
  */
-ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
+ssize_t _read(char **pinput, char **env, int *cmd_count,
+	      char *exit_c, char *ppid)
 {
 	char *command_exit = "exit", *command_env = "env";
 	size_t input_len = 0;
@@ -25,9 +27,12 @@ ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 	(*pinput)[cmd_len - 1] = '\0';
 	if (_strcmp(*pinput, command_exit) == 0)
 	{
-		free(exit_c);
+		if (exit_c != NULL)
+			free(exit_c);
 		if (env != NULL)
 			free(*env);
+		if (ppid != NULL)
+			free(ppid);
 		free(*pinput);
 		(*cmd_count)++;
 		exit(EXIT_SUCCESS);
