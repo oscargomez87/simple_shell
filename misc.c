@@ -42,7 +42,7 @@ void trimspaces(char **pinput)
 /**
  * trimcomments - Removes all character after a #.
  *
- * @cmd_arg: double pointer to arguments.
+ * @pinput: double pointer to prompt input.
  */
 
 void trimcomments(char **pinput)
