@@ -9,7 +9,7 @@
  * @exit_c: Variable that stores exit codes
  * Return: void.
  */
-void _read(char **pinput, char **env, int *cmd_count, char *exit_c)
+ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 {
 	char *command_exit = "exit", *command_env = "env";
 	size_t input_len = 0;
@@ -23,12 +23,6 @@ void _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 		printf("\n");
 		exit(EXIT_SUCCESS);
 	}
-	if (cmd_len == 1)
-	{
-		free(*pinput);
-		*pinput = NULL;
-		return;
-	}
 	(*pinput)[cmd_len - 1] = '\0';
 	if (strcmp(*pinput, command_exit) == 0)
 	{
@@ -41,5 +35,7 @@ void _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 	{
 		print_env();
 		(*cmd_count)++;
+		return (-1);
 	}
+	return (cmd_len);
 }

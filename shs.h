@@ -15,7 +15,7 @@ void _ntty(char *);
 void _itty(char *);
 void _exec(char *, char **, char *, int *);
 void _itoa(int, char *);
-void _read(char **, char **, int *, char *);
+ssize_t _read(char **, char **, int *, char *);
 void trimspaces(char **);
 char *_getenv(char *);
 void ecodeinit(char **);
