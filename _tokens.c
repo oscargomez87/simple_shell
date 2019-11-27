@@ -36,11 +36,11 @@ char *token_command(char *command_line)
 
 /**
  * token_arguments - Reads STDIN then saves it in a pointer removing NL
+ *
  * @command_line: pointer to save string in.
- * @exit_c: Variable that stores exit code
- * Return: void.
+ * Return: pointer to array of pointers.
  */
-char **token_arguments(char *command_line, char *exit_c)
+char **token_arguments(char *command_line)
 {
 	int i = 0, number_of_tokens = 0;
 	char *exvar = "$?";
@@ -53,14 +53,17 @@ char **token_arguments(char *command_line, char *exit_c)
 	result = malloc((number_of_tokens + 2) * sizeof(char *));
 	if (result == NULL)
 		return (NULL);
-	result[0] = strtok(command_line, s);
+	result[0] = _strdup(strtok(command_line, s));
 	for (i = 0; result[i] != NULL; i++)
 	{
-		result[i + 1] = strtok(NULL, s);
+		result[i + 1] = _strdup(strtok(NULL, s));
 		if (result[i + 1] != NULL)
 		{
 			if (_strcmp(result[i + 1], exvar) == 0)
-				result[i + 1] = exit_c;
+			{
+				free(result[i + 1]);
+				result[i + 1] = _itoa(errno);
+			}
 		}
 	}
 	return (result);

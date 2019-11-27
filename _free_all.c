@@ -11,7 +11,7 @@ void itty_free(char *pinput, char **cmd_arg, char *command)
 {
 	free(pinput);
 	free(command);
-	free(cmd_arg);
+	freepcontent(cmd_arg);
 }
 
 /**
@@ -24,5 +24,22 @@ void itty_free(char *pinput, char **cmd_arg, char *command)
 void ntty_free(char **cmd_arg, char *command)
 {
 	free(command);
+	freepcontent(cmd_arg);
+}
+
+/**
+ * freepcontent - Iterates array of pointers and frees the memory
+ *
+ * @cmd_arg: array of pointers to iterate and free
+ */
+void freepcontent(char **cmd_arg)
+{
+	int i = 0;
+
+	while (cmd_arg[i] != NULL)
+	{
+		free(cmd_arg[i]);
+		i++;
+	}
 	free(cmd_arg);
 }
