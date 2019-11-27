@@ -6,10 +6,9 @@
  *
  * @command: Command to execute with execve
  * @cmd_arg: Arguments for command to execute
- * @exit_c: keeps track of command execution exit code
  * @cmd_count: keeps track of number of commands executed
  */
-void _exec(char *command, char **cmd_arg, char *exit_c, int *cmd_count)
+void _exec(char *command, char **cmd_arg, int *cmd_count)
 {
 	int wait_status;
 	pid_t child_pid;
@@ -20,9 +19,7 @@ void _exec(char *command, char **cmd_arg, char *exit_c, int *cmd_count)
 	if (child_pid == 0)
 	{
 		execve(command, cmd_arg, environ);
-		free(command);
-		free(cmd_arg);
-		free(exit_c);
+		ntty_free(cmd_arg, command);
 	} else
 	{
 		wait(&wait_status);
@@ -30,7 +27,6 @@ void _exec(char *command, char **cmd_arg, char *exit_c, int *cmd_count)
 		if (WIFEXITED(wait_status))
 		{
 			wait_status = WEXITSTATUS(wait_status);
-			_itoa(wait_status, exit_c);
 		}
 	}
 	if (child_pid == 0)

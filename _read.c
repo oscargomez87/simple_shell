@@ -6,10 +6,9 @@
  * @pinput: pointer to save string in.
  * @env: pointer to string with PATH values
  * @cmd_count: Commands issued counter
- * @exit_c: Variable that stores exit codes
  * Return: void.
  */
-ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
+ssize_t _read(char **pinput, char **env, int *cmd_count)
 {
 	char *command_exit = "exit", *command_env = "env";
 	size_t input_len = 0;
@@ -25,11 +24,10 @@ ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 	(*pinput)[cmd_len - 1] = '\0';
 	if (_strcmp(*pinput, command_exit) == 0)
 	{
-		free(exit_c);
 		free(*env);
 		free(*pinput);
 		(*cmd_count)++;
-		exit(EXIT_SUCCESS);
+		exit(errno);
 	}
 	if (_strcmp(*pinput, command_env) == 0)
 	{

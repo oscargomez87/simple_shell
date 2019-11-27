@@ -1,25 +1,29 @@
 #include "shs.h"
 
 /**
- * _itoa - Stores an integer in a pointer to
- * already allocated memory
+ * _itoa - creates a space in memory and stores an integer
  *
- * @wait_status: Integet to store in memory address
- * @s: Pointer to memory address to store integer into
+ * @n: Pointer to memory address to store integer into
+ * Return: returns a pointer to the created string
  */
-void _itoa(int wait_status, char *s)
+char *_itoa(int n)
 {
-	int i, status;
+	int i, temp;
+	char *s;
 
-	status = wait_status;
-	for (i = 0; status / 10 != 0; i++)
-		status = status / 10;
+	temp = n;
+	for (i = 0; temp / 10 != 0; i++)
+		temp = temp / 10;
+	s = malloc((i + 2) * sizeof(char));
+	if (s == NULL)
+		return (NULL);
 	s[i + 1] = '\0';
 	for (; i >= 0; i--)
 	{
-		s[i] = (wait_status % 10) + '0';
-		wait_status = wait_status / 10;
+		s[i] = (n % 10) + '0';
+		n = n / 10;
 	}
+	return (s);
 }
 
 /**
