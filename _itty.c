@@ -24,6 +24,7 @@ void _itty(char *argv)
 		trimspaces(&pinput);
 		command = token_command(pinput);
 		cmd_arg = token_arguments(pinput, exit_c);
+		trimcomments(&cmd_arg);
 		file_access = _findcmd(&command, env);
 		if (file_access == 0)
 		{
