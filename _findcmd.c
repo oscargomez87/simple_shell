@@ -18,7 +18,7 @@ int _findcmd(char **pinput, char *env)
 	{
 		stat(*pinput, &sb);
 		if ((sb.st_mode & S_IFMT) == S_IFDIR)
-			return (-1);
+			return (126);
 		else if  ((sb.st_mode & S_IFMT) == S_IFREG)
 			return (0);
 	}

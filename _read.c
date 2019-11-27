@@ -6,6 +6,7 @@
  * @pinput: pointer to save string in.
  * @env: pointer to string with PATH values
  * @cmd_count: Commands issued counter
+ * @exit_c: pointer to string with exit code
  * Return: void.
  */
 ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)

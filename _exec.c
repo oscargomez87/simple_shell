@@ -6,6 +6,7 @@
  *
  * @command: Command to execute with execve
  * @cmd_arg: Arguments for command to execute
+ * @exit_c: pointer to string with exit codes
  * @cmd_count: keeps track of number of commands executed
  */
 void _exec(char *command, char **cmd_arg, char *exit_c, int *cmd_count)
