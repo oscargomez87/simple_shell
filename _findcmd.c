@@ -5,13 +5,11 @@
  * searching PATH in case is not a full path
  *
  * @pinput: User input.
- * @argv: Name of program, used in error printing
  * @env: string with PATH value
- * @errorc: error count
  * Return: -1 if pinput is found but is a directory,
- * -2 if pinput can't be found, 0 otherwise
+ * 127 if pinput can't be found in PATH, 0 otherwise
  */
-int _findcmd(char **pinput, char *argv, char *env, int *errorc)
+int _findcmd(char **pinput, char *env)
 {
 	char *envcp = NULL;
 	struct stat sb;
@@ -34,8 +32,5 @@ int _findcmd(char **pinput, char *argv, char *env, int *errorc)
 		return (0);
 	}
 	free(envcp);
-	(*errorc)++;
-	printf("%s: %d: %s: not found\n",
-	       argv, *errorc, *pinput);
 	return (127);
 }

@@ -9,47 +9,43 @@
  */
 void _ntty(char *argv)
 {
-	char *pinput = NULL, *env = NULL, *command = NULL, *exit_c = NULL;
+	char *pinput = NULL, *env = NULL, *command = NULL,
+		*exit_c = NULL, *temp = NULL;
 	char **cmd_arg;
-	int file_access, errorc = 0;
+	int file_access, cmd_count = 0;
+	ssize_t cmd_len;
 
 	env = _getenv("PATH");
-	_read(&pinput, &env);
-	if (pinput == NULL)
-		return;
-	command = token_command(pinput);
-	cmd_arg = token_arguments(pinput, exit_c);
-	exit_c = malloc(4 * sizeof(char));
-	file_access = _findcmd(&command, argv, env, &errorc);
-	if (file_access == 0)
+	ecodeinit(&exit_c);
+	cmd_len = _read(&pinput, &env, &cmd_count, exit_c);
+	temp = pinput;
+	while (cmd_len >= 0)
 	{
-		file_access = access(command, X_OK);
+		if (pinput == NULL)
+			return;
+		trimspaces(&pinput);
+		command = token_command(pinput);
+		cmd_arg = token_arguments(pinput, exit_c);
+		file_access = _findcmd(&command, env);
 		if (file_access == 0)
 		{
-			_exec(command, cmd_arg, exit_c);
-		} else
-		{
-			errorc++;
-			printf("%s: %d: %s: Permission denied\n",
-			       argv, errorc, command);
-			free(env);
-			_free_all(pinput, cmd_arg, command);
-			exit(126);
+			file_access = access(command, X_OK);
+			if (file_access == 0)
+				_exec(command, cmd_arg, exit_c, &cmd_count);
 		}
-	} else if (file_access == -1)
-	{
-		errorc++;
-		printf("%s: %d: %s: Permission denied\n",
-		       argv, errorc, command);
-		free(env);
-		_free_all(pinput, cmd_arg, command);
-		exit(126);
-	} else if (file_access == 127)
-	{
-		free(env);
-		_free_all(pinput, cmd_arg, command);
-		exit(127);
+		if (file_access == -1)
+		{
+			pdeniederr(argv, exit_c);
+			ntty_free(cmd_arg, command);
+		} else if (file_access == 127)
+		{
+			nfounderr(argv, exit_c);
+			ntty_free(cmd_arg, command);
+		} else
+			ntty_free(cmd_arg, command);
+		cmd_len = _read(&pinput, &env, &cmd_count, exit_c);
 	}
-	if (exit_c != 0)
-		exit(atoi(exit_c));
+	free(temp);
+	free(env);
+	free(exit_c);
 }

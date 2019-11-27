@@ -8,11 +8,22 @@
  */
 char *token_command(char *command_line)
 {
-	int i = 0, command_size = 0;
+	int i, j, command_size = 0;
+	const char delimit[7] = " \t\r\n\v\f";
 	char *result = NULL;
 
-	for (i = 0; command_line[i] != 32 && command_line[i] != '\0'; i++)
-		command_size++;
+	for (i = 0; command_line[i] != '\0'; i++)
+	{
+		for (j = 0; delimit[j] != '\0'; j++)
+		{
+			if (command_line[i] == delimit[j])
+				break;
+		}
+		if (delimit[j] == '\0')
+			command_size++;
+		else
+			break;
+	}
 
 	result = (char *) malloc((command_size + 1) * sizeof(char));
 	if (result == NULL)
@@ -26,7 +37,7 @@ char *token_command(char *command_line)
 /**
  * token_arguments - Reads STDIN then saves it in a pointer removing NL
  * @command_line: pointer to save string in.
- *
+ * @exit_c: Variable that stores exit code
  * Return: void.
  */
 char **token_arguments(char *command_line, char *exit_c)
@@ -48,7 +59,7 @@ char **token_arguments(char *command_line, char *exit_c)
 		result[i + 1] = strtok(NULL, s);
 		if (result[i + 1] != NULL)
 		{
-			if (strcmp(result[i + 1], exvar) == 0 )
+			if (strcmp(result[i + 1], exvar) == 0)
 				result[i + 1] = exit_c;
 		}
 	}
