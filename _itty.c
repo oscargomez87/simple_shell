@@ -16,6 +16,8 @@ void _itty(char *argv)
 		write(STDOUT_FILENO, "$ ", 2);
 		if (env == NULL)
 			env = _getenv("PATH");
+		if (exit_c == NULL)
+			ecodeinit(&exit_c);
 		_read(&pinput, &env, &cmd_count, exit_c);
 		if (pinput == NULL)
 		{
