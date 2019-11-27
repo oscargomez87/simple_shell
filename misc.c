@@ -50,8 +50,11 @@ void trimcomments(char ***cmd_arg)
 
 	for (i = 0; *(*cmd_arg + i) != NULL; i++)
 		if (*(*(*cmd_arg + i)) == '#')
+		{
 			for (; (*(*cmd_arg + i) != NULL); i++)
 				*(*cmd_arg + i) = NULL;
+			return;
+		}
 }
 
 
