@@ -9,7 +9,7 @@
 void pdeniederr(char *argv, char *exit_c)
 {
 	perror(argv);
-	strcpy(exit_c, "126");
+	_strcpy(exit_c, "126");
 }
 
 /**
@@ -21,5 +21,5 @@ void pdeniederr(char *argv, char *exit_c)
 void nfounderr(char *argv, char *exit_c)
 {
 	perror(argv);
-	strcpy(exit_c, "127");
+	_strcpy(exit_c, "127");
 }

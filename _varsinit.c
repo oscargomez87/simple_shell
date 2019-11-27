@@ -19,8 +19,9 @@ char *_getenv(char *s)
 		if (environ[i][j] == '=')
 		{
 			j++;
-			env = malloc(strlen(&(environ[i][j])) + 1);
-			strcpy(env, &(environ[i][j]));
+			env = malloc((_strlen(&(environ[i][j])) + 1)
+				     * sizeof(char));
+			_strcpy(env, &(environ[i][j]));
 			return (env);
 		}
 	}
@@ -54,13 +55,13 @@ int _getpath(char **command, char *envcp)
 
 	while (env_token != NULL)
 	{
-		fullcommand = malloc(strlen(*command) + strlen(env_token) + 2);
+		fullcommand = malloc(_strlen(*command) + _strlen(env_token) + 2);
 		if (fullcommand == NULL)
 			return (-1);
 
-		strcpy(fullcommand, env_token);
-		strcat(fullcommand, "/");
-		strcat(fullcommand, *command);
+		_strcpy(fullcommand, env_token);
+		_strcat(fullcommand, "/");
+		_strcat(fullcommand, *command);
 		if (access(fullcommand, F_OK) == 0)
 		{
 			free(*command);

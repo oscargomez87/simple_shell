@@ -22,10 +22,10 @@ int _findcmd(char **pinput, char *env)
 		else if  ((sb.st_mode & S_IFMT) == S_IFREG)
 			return (0);
 	}
-	envcp = malloc(strlen(env) + 1);
+	envcp = malloc(_strlen(env) + 1);
 	if (envcp == NULL)
 		return (-1);
-	strcpy(envcp, env);
+	_strcpy(envcp, env);
 	if (_getpath(pinput, envcp) == 0)
 	{
 		free(envcp);

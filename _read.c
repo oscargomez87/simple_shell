@@ -23,7 +23,7 @@ ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 		return (cmd_len);
 	}
 	(*pinput)[cmd_len - 1] = '\0';
-	if (strcmp(*pinput, command_exit) == 0)
+	if (_strcmp(*pinput, command_exit) == 0)
 	{
 		free(exit_c);
 		free(*env);
@@ -31,9 +31,8 @@ ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 		(*cmd_count)++;
 		exit(EXIT_SUCCESS);
 	}
-	if (strcmp(*pinput, command_env) == 0)
+	if (_strcmp(*pinput, command_env) == 0)
 	{
-		print_env();
 		(*cmd_count)++;
 		return (-1);
 	}

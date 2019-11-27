@@ -22,11 +22,14 @@ void ecodeinit(char **);
 int _findcmd(char **, char *);
 char *token_command(char *);
 char **token_arguments(char *, char *);
-void print_env(void);
 void itty_free(char *, char **, char *);
 void ntty_free(char **, char *);
 int _getpath(char **, char *);
 void pdeniederr(char *, char *);
 void nfounderr(char *, char *);
+int _strcmp(char *, char *);
+int _strlen(char *);
+char *_strcpy(char *, char *);
+char *_strcat(char *, char *);
 
 #endif

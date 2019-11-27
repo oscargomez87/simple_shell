@@ -18,7 +18,6 @@ int main(int argc, char **argv)
 			_ntty(*argv);
 	} else
 	{
-		printf("Too many arguments\n");
 		return (2);
 	}
 	return (0);
