@@ -18,10 +18,6 @@ ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 	cmd_len = getline(&(*pinput), &input_len, stdin);
 	if (cmd_len == -1)
 	{
-		/*free(*env);
-		  free(exit_c);*/
-		/*printf("\n");
-		exit(EXIT_SUCCESS);*/
 		free(*pinput);
 		(*cmd_count)++;
 		return (cmd_len);
