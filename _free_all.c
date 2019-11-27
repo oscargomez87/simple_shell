@@ -24,12 +24,8 @@ void itty_free(char *pinput, char **cmd_arg, char *command)
  * @env: pointer to mermory used to store environment PATH values
  * @exit_c: pointer to memory used to store exit codes
  */
-void ntty_free(char *pinput, char **cmd_arg,
-	       char *command, char *env, char *exit_c)
+void ntty_free(char **cmd_arg, char *command)
 {
-	free(exit_c);
-	free(env);
-	free(pinput);
-	free(command);
-	free(cmd_arg);
+	  free(command);
+	  free(cmd_arg);
 }

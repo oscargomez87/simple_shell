@@ -12,9 +12,9 @@ int main(int argc, char **argv)
 {
 	if (argc == 1)
 	{
-		if (isatty(STDIN_FILENO))
+		/*if (isatty(STDIN_FILENO))
 			_itty(*argv);
-		else
+			else*/
 			_ntty(*argv);
 	} else
 	{

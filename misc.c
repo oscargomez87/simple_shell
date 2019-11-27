@@ -29,13 +29,11 @@ void _itoa(int wait_status, char *s)
  */
 void trimspaces(char **pinput)
 {
-	char *temp;
+	int i = 0;
 
-	temp = *pinput;
 	while ((*pinput)[0] == ' ' || (*pinput)[0] == '\t')
 	{
 		(*pinput)++;
+		i++;
 	}
-	*pinput = strdup(*pinput);
-	free(temp);
 }

@@ -12,10 +12,9 @@
 void _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 {
 	char *command_exit = "exit", *command_env = "env";
-	size_t input_len = 0;
 	ssize_t cmd_len;
 
-	cmd_len = getline(&(*pinput), &input_len, stdin);
+	cmd_len = 0;
 	if (cmd_len == -1)
 	{
 		free(*env);
