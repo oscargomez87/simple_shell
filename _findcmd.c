@@ -22,15 +22,19 @@ int _findcmd(char **pinput, char *env)
 		else if  ((sb.st_mode & S_IFMT) == S_IFREG)
 			return (0);
 	}
-	envcp = malloc(_strlen(env) + 1);
-	if (envcp == NULL)
-		return (-1);
-	_strcpy(envcp, env);
-	if (_getpath(pinput, envcp) == 0)
+	if (env != NULL)
 	{
+		envcp = malloc(_strlen(env) + 1);
+		if (envcp == NULL)
+			return (-1);
+		_strcpy(envcp, env);
+		if (_getpath(pinput, envcp) == 0)
+		{
+			free(envcp);
+			return (0);
+		}
 		free(envcp);
-		return (0);
-	}
-	free(envcp);
-	return (127);
+		return (127);
+	} else
+		return (-1);
 }

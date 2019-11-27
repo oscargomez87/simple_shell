@@ -12,17 +12,20 @@ char *_getenv(char *s)
 	int i, j;
 	char *env;
 
-	for (i = 0; environ[i] != NULL; i++)
+	if (s != NULL)
 	{
-		for (j = 0; environ[i][j] == s[j]; j++)
-			;
-		if (environ[i][j] == '=')
+		for (i = 0; environ[i] != NULL; i++)
 		{
-			j++;
-			env = malloc((_strlen(&(environ[i][j])) + 1)
-				     * sizeof(char));
-			_strcpy(env, &(environ[i][j]));
-			return (env);
+			for (j = 0; environ[i][j] == s[j]; j++)
+				;
+			if (environ[i][j] == '=')
+			{
+				j++;
+				env = malloc((_strlen(&(environ[i][j])) + 1)
+					     * sizeof(char));
+				_strcpy(env, &(environ[i][j]));
+				return (env);
+			}
 		}
 	}
 	return (NULL);
@@ -39,6 +42,28 @@ void ecodeinit(char **exit_c)
 	*exit_c = malloc(4 * sizeof(char));
 	(*exit_c)[0] = 0 + '0';
 	(*exit_c)[1] = '\0';
+}
+
+/**
+ * mpidinit - Initilizes variable to store the process ID
+ * with 0 on first run
+ *
+ * @my_pid: process ID
+ * @ppid: pointer to initialize with process ID
+ */
+void mpidinit(char **ppid, pid_t my_pid)
+{
+	int fd, ppidsize;
+	char s[1024];
+
+	fd = open("/proc/sys/kernel/pid_max", O_RDONLY);
+	if (fd == -1)
+		return;
+	ppidsize = read(fd, s, 1024);
+	if (ppidsize == -1)
+		return;
+	*ppid = malloc(ppidsize * sizeof(char));
+	_itoa(my_pid, *ppid);
 }
 
 /**

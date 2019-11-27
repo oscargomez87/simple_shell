@@ -15,10 +15,12 @@ void sighandler(int signum)
  * _itty - Interactive, waits for input then calls program if it is found.
  *
  * @argv: parameters received from main(), name of the application.
+ * @my_pid: process ID of this program
  */
-void _itty(char *argv)
+void _itty(char *argv, pid_t my_pid)
 {
-	char *pinput = NULL, *env = NULL, *command = NULL, *exit_c = NULL;
+	char *pinput = NULL, *env = NULL, *command = NULL,
+		*exit_c = NULL, *ppid = NULL;
 	char **cmd_arg;
 	int file_access, cmd_count = 0, cmd_len = 0;
 
@@ -30,15 +32,16 @@ void _itty(char *argv)
 			env = _getenv("PATH");
 		if (exit_c == NULL)
 			ecodeinit(&exit_c);
-		cmd_len = _read(&pinput, &env, &cmd_count, exit_c);
+		if (ppid == NULL)
+			mpidinit(&ppid, my_pid);
+		cmd_len = _read(&pinput, &env, &cmd_count, exit_c, ppid);
 		if (cmd_len == 1)
 			continue;
 		trimspaces(&pinput);
 		trimcomments(&pinput);
 		trimexit(&pinput, &env, exit_c);
 		command = token_command(pinput);
-		cmd_arg = token_arguments(pinput, exit_c);
-		/*trimcomments(&cmd_arg);*/
+		cmd_arg = token_arguments(pinput, exit_c, ppid);
 		file_access = _findcmd(&command, env);
 		if (file_access == 0)
 		{

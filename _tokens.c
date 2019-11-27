@@ -39,12 +39,13 @@ char *token_command(char *command_line)
  *
  * @command_line: pointer to save string in.
  * @exit_c: pointer to string with exit code
+ * @ppid: pointer to string with process ID
  * Return: pointer to array of pointers.
  */
-char **token_arguments(char *command_line, char *exit_c)
+char **token_arguments(char *command_line, char *exit_c, char *ppid)
 {
 	int i = 0, number_of_tokens = 0;
-	char *exvar = "$?";
+	char *exvar = "$?", *pidvar = "$$", *temp;
 	const char s[7] = " \t\r\n\v\f";
 	char **result;
 
@@ -64,6 +65,15 @@ char **token_arguments(char *command_line, char *exit_c)
 			{
 				free(result[i + 1]);
 				result[i + 1] = _strdup(exit_c);
+			} else if (_strcmp(result[i + 1], pidvar) == 0)
+			{
+				free(result[i + 1]);
+				result[i + 1] = _strdup(ppid);
+			} else if (result[i + 1][0] == '$')
+			{
+				temp = result[i + 1];
+				result[i + 1] = _getenv(&result[i + 1][1]);
+				free(temp);
 			}
 		}
 	}

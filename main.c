@@ -10,12 +10,15 @@
  */
 int main(int argc, char **argv)
 {
+	pid_t my_pid;
+
+	my_pid = getpid();
 	if (argc == 1)
 	{
 		if (isatty(STDIN_FILENO))
-			_itty(*argv);
+			_itty(*argv, my_pid);
 		else
-			_ntty(*argv);
+			_ntty(*argv, my_pid);
 	} else
 	{
 		return (2);

@@ -42,7 +42,7 @@ void trimspaces(char **pinput)
 /**
  * trimcomments - Removes all character after a #.
  *
- * @pinput: double pointer to arguments.
+ * @pinput: double pointer to prompt input.
  */
 
 void trimcomments(char **pinput)
@@ -57,6 +57,7 @@ void trimcomments(char **pinput)
 			break;
 		}
 }
+
 
 /**
  * trimexit - Removes spaces at the start of a string
@@ -102,10 +103,3 @@ void trimexit(char **pinput, char **env, char *exit_c)
 		exit(exit_code);
 	}
 }
-
-
-
-
-
-
-
