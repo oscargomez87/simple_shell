@@ -7,17 +7,14 @@
 - simple UNIX command interpreter.
 
 .SH SYNOPSIS
-simple_shell
+.B ./hsh
 
-.SH ARGUMENTS
-An interactive shell is one started without non-option arguments.
 
 .SH DESCRIPTION
 .B simple_shell
-is a UNIX command line interpreter that display a prompt and wait for the user
- to type a command. A command line always ends with a new line. The prompt is
- displayed again each time a command has been executed. Use the PATH, and
- handle commands with arguments.
+is a UNIX command line interpreter that display a prompt and wait for the user to type a command. 
+A command line always ends with a new line. The prompt isdisplayed again each time a command has 
+been executed. Use the PATH, and handle commands with arguments.
 
 The current version of simple_shell is in the process of being changed to
 conform with the Holberton School specifications for the shell.  This version
@@ -27,7 +24,7 @@ by Holberton School, plus a few additional extensions, are being incorporated
 into this simple_shell.  This man page is not intended to be a tutorial or
 a complete specification of the simple_shell.
 
-   Overview
+Overview
 The
 .B simple_shell
 is a command that reads lines from either a file or the terminal,
@@ -38,6 +35,61 @@ interactive use and has the advantage that the interpretative language is
 common to both interactive and non-interactive use (shell scripts).
 That is, commands can be typed directly to the running simple_shell or can
 be put into a file and the file can be executed directly by the simple_shell.
+
+
+.SH ARGUMENTS
+An interactive shell is started without non-option arguments. After that
+the first arguments from input is assumed to be an executable file
+followed by parameters accepted by that command.
+
+.SH INTERACTIVE MODE EXAMPLE
+.PP
+.PP
+$ ./hsh
+.PP
+$ /bin/ls
+.PP
+hsh main.c shell.c
+.PP
+$ exit
+.PP
+$
+.PP
+.PP
+.SH NON-INTERACTIVE MODE EXAMPLE
+.PP
+.PP
+$ echo "/bin/ls" | ./hsh
+.PP
+.PP
+hsh main.c shell.c test_ls_2
+
+.SH VARIABLES
+Add the
+.B $
+to a variable name expands to the value of the variable
+.PP
+.RS
+.B $?
+expands to the return value of the last command executed
+
+.SH BUILTIN COMMANDS
+Commands called and handled directly in the simple shell and thus do not need
+to call upon a child process to be executed.
+
+.PP
+.B exit
+.PP
+- terminates the shell returning a exit status of the previous command attempted
+to be executed
+.PP
+.PP
+.B env
+.PP
+- prints the enviromental variables and their values in the notation "name=value"
+.PP
+.PP
+
 
 .SH COMMENTS
 A word beginning with # causes that word and all remaining characters on that
@@ -55,4 +107,7 @@ No known bugs.
 
 .SH AUTHOR
 Oscar Gomez T. (https://github.com/OscarGomez87)
+.PP
 Leonardo Calderon J. (https://github.com/leocjj)
+
+
