@@ -24,9 +24,9 @@ char *token_command(char *);
 char **token_arguments(char *, char *);
 void print_env(void);
 void itty_free(char *, char **, char *);
-void ntty_free(char *, char **, char *, char *, char *);
+void ntty_free(char **, char *);
 int _getpath(char **, char *);
-void pdeniederr(int *, char *, char *, char *);
-void nfounderr(int *, char *, char *, char *);
+void pdeniederr(char *, char *);
+void nfounderr(char *, char *);
 
 #endif

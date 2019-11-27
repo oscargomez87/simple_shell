@@ -9,9 +9,9 @@
  */
 void _ntty(char *argv)
 {
-	char *pinput = NULL, *env = NULL, *command = NULL, *exit_c = NULL, *temp = NULL;
+	char *pinput = NULL, *env = NULL, *command = NULL, __attribute__((unused))*exit_c = NULL, *temp = NULL;
 	char **cmd_arg;
-	int file_access, cmd_count = 0, e_code, i;
+	int file_access, cmd_count = 0, __attribute__((unused))e_code, i;
 	size_t input_len = 0;
 	ssize_t cmd_len;
 
@@ -27,7 +27,7 @@ void _ntty(char *argv)
 			;
 		pinput[i] = '\0';
 		trimspaces(&pinput);
-		pinput = token_command(pinput);
+		command = token_command(pinput);
 		cmd_arg = token_arguments(pinput, exit_c);
 		file_access = _findcmd(&command, env);
 		if (file_access == 0)
@@ -39,22 +39,22 @@ void _ntty(char *argv)
 		if (file_access == -1)
 		{
 			pdeniederr(&cmd_count, argv, command, exit_c);
-			ntty_free(pinput, cmd_arg, command, env, exit_c);
+			ntty_free(cmd_arg, command);
 			exit(126);
 		} else if (file_access == 127)
 		{
 			nfounderr(&cmd_count, argv, command, exit_c);
-			ntty_free(pinput, cmd_arg, command, env, exit_c);
+			ntty_free(cmd_arg, command);
 			exit(127);
 		}else
 		{
 			e_code  = atoi(exit_c);
-			ntty_free(pinput, cmd_arg, command, env, exit_c);
+			ntty_free(cmd_arg, command);
 		}
 		cmd_len = getline(&pinput, &input_len, stdin);
 	}
 	free(temp);
 	free(env);
 	free(exit_c);
-	exit(e_code);
+/*	exit(e_code);*/
 }
