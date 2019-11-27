@@ -58,6 +58,14 @@ void trimcomments(char **pinput)
 		}
 }
 
+/**
+ * trimexit - Removes spaces at the start of a string
+ *
+ * @pinput: pointer to save string in.
+ * @env: pointer to string with PATH values
+ * @exit_c: pointer to string with exit code
+ * Return: void.
+ */
 void trimexit(char **pinput, char **env, char *exit_c)
 {
 	char *command_exit = "exit", *temp;
