@@ -13,6 +13,7 @@ char *_getenv(char *s)
 	char *env;
 
 	if (s != NULL)
+	{
 		for (i = 0; environ[i] != NULL; i++)
 		{
 			for (j = 0; environ[i][j] == s[j]; j++)
@@ -26,8 +27,8 @@ char *_getenv(char *s)
 				return (env);
 			}
 		}
-	else
-		return (NULL);
+	}
+	return (NULL);
 }
 
 /**
