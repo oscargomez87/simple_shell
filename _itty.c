@@ -8,7 +8,7 @@
 void sighandler(int signum)
 {
 	(void) signum;
-	write(STDOUT_FILENO, "\n", 1);
+	write(STDOUT_FILENO, "\n$ ", 3);
 }
 
 /**
