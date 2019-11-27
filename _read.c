@@ -26,7 +26,8 @@ ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 	if (_strcmp(*pinput, command_exit) == 0)
 	{
 		free(exit_c);
-		free(*env);
+		if (env != NULL)
+			free(*env);
 		free(*pinput);
 		(*cmd_count)++;
 		exit(EXIT_SUCCESS);

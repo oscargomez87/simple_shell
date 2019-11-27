@@ -40,7 +40,8 @@ void _ntty(char *argv)
 		cmd_len = _read(&pinput, &env, &cmd_count, exit_c);
 	}
 	free(temp);
-	free(env);
+	if (env != NULL)
+		free(env);
 	n = _atoi(exit_c);
 	free(exit_c);
 	exit(n);
