@@ -12,20 +12,22 @@ char *_getenv(char *s)
 	int i, j;
 	char *env;
 
-	for (i = 0; environ[i] != NULL; i++)
-	{
-		for (j = 0; environ[i][j] == s[j]; j++)
-			;
-		if (environ[i][j] == '=')
+	if (s != NULL)
+		for (i = 0; environ[i] != NULL; i++)
 		{
-			j++;
-			env = malloc((_strlen(&(environ[i][j])) + 1)
-				     * sizeof(char));
-			_strcpy(env, &(environ[i][j]));
-			return (env);
+			for (j = 0; environ[i][j] == s[j]; j++)
+				;
+			if (environ[i][j] == '=')
+			{
+				j++;
+				env = malloc((_strlen(&(environ[i][j])) + 1)
+					     * sizeof(char));
+				_strcpy(env, &(environ[i][j]));
+				return (env);
+			}
 		}
-	}
-	return (NULL);
+	else
+		return (NULL);
 }
 
 /**
