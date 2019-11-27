@@ -11,6 +11,7 @@ void _itty(char *argv)
 	char **cmd_arg;
 	int file_access, cmd_count = 0, cmd_len = 0;
 
+	signal(SIGINT, SIG_IGN);
 	while (1)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
