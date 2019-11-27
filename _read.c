@@ -18,10 +18,13 @@ ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 	cmd_len = getline(&(*pinput), &input_len, stdin);
 	if (cmd_len == -1)
 	{
-		free(*env);
-		free(exit_c);
-		printf("\n");
-		exit(EXIT_SUCCESS);
+		/*free(*env);
+		  free(exit_c);*/
+		/*printf("\n");
+		exit(EXIT_SUCCESS);*/
+		free(*pinput);
+		(*cmd_count)++;
+		return (cmd_len);
 	}
 	(*pinput)[cmd_len - 1] = '\0';
 	if (strcmp(*pinput, command_exit) == 0)
@@ -29,6 +32,7 @@ ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 		free(exit_c);
 		free(*env);
 		free(*pinput);
+		(*cmd_count)++;
 		exit(EXIT_SUCCESS);
 	}
 	if (strcmp(*pinput, command_env) == 0)

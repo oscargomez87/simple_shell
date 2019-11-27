@@ -34,15 +34,10 @@ void _ntty(char *argv)
 				_exec(command, cmd_arg, exit_c, &cmd_count);
 		}
 		if (file_access == -1)
-		{
 			pdeniederr(argv, exit_c);
-			ntty_free(cmd_arg, command);
-		} else if (file_access == 127)
-		{
+		else if (file_access == 127)
 			nfounderr(argv, exit_c);
-			ntty_free(cmd_arg, command);
-		} else
-			ntty_free(cmd_arg, command);
+		ntty_free(cmd_arg, command);
 		cmd_len = _read(&pinput, &env, &cmd_count, exit_c);
 	}
 	free(temp);
