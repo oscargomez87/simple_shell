@@ -45,6 +45,28 @@ void ecodeinit(char **exit_c)
 }
 
 /**
+ * mpidinit - Initilizes variable to store the process ID
+ * with 0 on first run
+ *
+ * @my_pid: process ID
+ * @ppid: pointer to initialize with process ID
+ */
+void mpidinit(char **ppid, pid_t my_pid)
+{
+	int fd, ppidsize;
+	char s[1024];
+
+	fd = open("/proc/sys/kernel/pid_max", O_RDONLY);
+	if (fd == -1)
+		return;
+	ppidsize = read(fd, s, 1024);
+	if (ppidsize == -1)
+		return;
+	*ppid = malloc(ppidsize * sizeof(char));
+	_itoa(my_pid, *ppid);
+}
+
+/**
  * _getpath - checks if user input can be found in the PATH,
  * then stores it
  *
