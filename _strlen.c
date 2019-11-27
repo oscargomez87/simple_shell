@@ -1,5 +1,5 @@
 /**
- * _strlen_recursion - Returns the length of a string
+ * _strlen - Returns the length of a string
  * @s: string
  * Return: Length of string
  */
