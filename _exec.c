@@ -8,7 +8,7 @@
  * @cmd_arg: Arguments for command to execute
  * @cmd_count: keeps track of number of commands executed
  */
-void _exec(char *command, char **cmd_arg, int *cmd_count)
+void _exec(char *command, char **cmd_arg, char *exit_c, int *cmd_count)
 {
 	int wait_status;
 	pid_t child_pid;
@@ -27,6 +27,7 @@ void _exec(char *command, char **cmd_arg, int *cmd_count)
 		if (WIFEXITED(wait_status))
 		{
 			wait_status = WEXITSTATUS(wait_status);
+			_itoa(wait_status, exit_c);
 		}
 	}
 	if (child_pid == 0)

@@ -8,7 +8,7 @@
  * @cmd_count: Commands issued counter
  * Return: void.
  */
-ssize_t _read(char **pinput, char **env, int *cmd_count)
+ssize_t _read(char **pinput, char **env, int *cmd_count, char *exit_c)
 {
 	char *command_exit = "exit", *command_env = "env";
 	size_t input_len = 0;
@@ -24,10 +24,11 @@ ssize_t _read(char **pinput, char **env, int *cmd_count)
 	(*pinput)[cmd_len - 1] = '\0';
 	if (_strcmp(*pinput, command_exit) == 0)
 	{
+		free(exit_c);
 		free(*env);
 		free(*pinput);
 		(*cmd_count)++;
-		exit(errno);
+		exit(EXIT_SUCCESS);
 	}
 	if (_strcmp(*pinput, command_env) == 0)
 	{

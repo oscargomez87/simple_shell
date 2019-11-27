@@ -1,7 +1,6 @@
 #ifndef SHS_H_INCLUDED
 #define SHS_H_INCLUDED
 
-#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -14,15 +13,16 @@ extern char **environ;
 
 void _ntty(char *);
 void _itty(char *);
-void _exec(char *, char **, int *);
-char *_itoa(int);
-ssize_t _read(char **, char **, int *);
+void _exec(char *, char **, char *, int *);
+void _itoa(int, char *);
+int _atoi(char *);
+ssize_t _read(char **, char **, int *, char *);
 void trimspaces(char **);
 char *_getenv(char *);
 void ecodeinit(char **);
 int _findcmd(char **, char *);
 char *token_command(char *);
-char **token_arguments(char *);
+char **token_arguments(char *, char *);
 void itty_free(char *, char **, char *);
 void ntty_free(char **, char *);
 int _getpath(char **, char *);

@@ -9,33 +9,39 @@
  */
 void _ntty(char *argv)
 {
-	char *pinput = NULL, *env = NULL, *command = NULL, *temp = NULL;
+	char *pinput = NULL, *env = NULL, *command = NULL,
+		*temp = NULL, *exit_c = NULL;
 	char **cmd_arg;
-	int file_access, cmd_count = 0;
+	int file_access, cmd_count = 0, n;
 	ssize_t cmd_len;
 
 	env = _getenv("PATH");
-	cmd_len = _read(&pinput, &env, &cmd_count);
+	ecodeinit(&exit_c);
+	cmd_len = _read(&pinput, &env, &cmd_count, exit_c);
 	temp = pinput;
 	while (cmd_len >= 0)
 	{
 		trimspaces(&pinput);
 		command = token_command(pinput);
-		cmd_arg = token_arguments(pinput);
+		cmd_arg = token_arguments(pinput, exit_c);
 		file_access = _findcmd(&command, env);
 		if (file_access == 0)
 		{
 			file_access = access(command, X_OK);
 			if (file_access == 0)
-				_exec(command, cmd_arg, &cmd_count);
+				_exec(command, cmd_arg, exit_c, &cmd_count);
 			else
 				perror(argv);
-		} else
-			perror(argv);
+		} else if(file_access == 127)
+			nfounderr(argv, exit_c);
+		else
+			pdeniederr(argv, exit_c);
 		ntty_free(cmd_arg, command);
-		cmd_len = _read(&pinput, &env, &cmd_count);
+		cmd_len = _read(&pinput, &env, &cmd_count, exit_c);
 	}
 	free(temp);
 	free(env);
-	exit(errno);
+	n = _atoi(exit_c);
+	free(exit_c);
+	exit(n);
 }
