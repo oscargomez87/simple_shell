@@ -32,10 +32,10 @@ void _itty(char *argv)
 				_exec(command, cmd_arg, exit_c, &cmd_count);
 			else
 				pdeniederr(argv, exit_c);
-		} else if (file_access == 126)
-			pdeniederr(argv, exit_c);
-		else
+		} else if (file_access == 127)
 			nfounderr(argv, exit_c);
+		else
+			pdeniederr(argv, exit_c);
 		itty_free(pinput, cmd_arg, command);
 	}
 }

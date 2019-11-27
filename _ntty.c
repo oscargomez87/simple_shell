@@ -31,7 +31,7 @@ void _ntty(char *argv)
 			if (file_access == 0)
 				_exec(command, cmd_arg, exit_c, &cmd_count);
 			else
-				perror(argv);
+			        pdeniederr(argv, exit_c);
 		} else if (file_access == 127)
 			nfounderr(argv, exit_c);
 		else
