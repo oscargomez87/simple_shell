@@ -78,7 +78,7 @@ void trimexit(char **pinput, char **env, char *exit_c)
     char *command_exit = "exit", *temp = "    ";
     int i = 0, j = 0, exit_flag = 0, size_of_exit_code = 0, exit_code = 0;
 
-    for (i = 0; *(*pinput + i) != NULL && i < 4; i++)
+    for (i = 0; *(*pinput + i) != '\0' && i < 4; i++)
 		*(temp + i) = *(*pinput + i);
 
     if (_strcmp(command_exit, temp) == 0)
@@ -86,10 +86,10 @@ void trimexit(char **pinput, char **env, char *exit_c)
 	else
 		return;
 
-    for (i = 0; *(*pinput + i) != " "; i++)
+    for (i = 0; *(*pinput + i) != ' '; i++)
 		;
 
-	for (j = i + 1; *(*pinput + j) != " "; j++)
+	for (j = i + 1; *(*pinput + j) != ' '; j++)
 		size_of_exit_code++;
 
 	temp = malloc((size_of_exit_code + 1)* sizeof(char));
