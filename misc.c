@@ -46,9 +46,9 @@ void trimspaces(char **pinput)
  */
 void trimcomments(char ***cmd_arg)
 {
-	int i, j;
+	int i;
 
-	for (i = 0; *(*cmd_arg + i) != NULL); i++)
+	for (i = 0; *(*cmd_arg + i) != NULL; i++)
 		if (*(*(*cmd_arg + i)) == '#')
 			for (;(*(*cmd_arg + i) != NULL); i++)
 				*(*cmd_arg + i) = NULL;
