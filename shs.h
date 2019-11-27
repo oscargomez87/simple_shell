@@ -37,6 +37,7 @@ char *_strcat(char *, char *);
 char *_strdup(char *);
 void freepcontent(char **);
 void trimcomments(char **);
+void trimexit(char **pinput, char **env, char *exit_c);
 void mpidinit(char **, pid_t);
 
 #endif

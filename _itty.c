@@ -39,6 +39,7 @@ void _itty(char *argv, pid_t my_pid)
 			continue;
 		trimspaces(&pinput);
 		trimcomments(&pinput);
+		trimexit(&pinput, &env, exit_c);
 		command = token_command(pinput);
 		cmd_arg = token_arguments(pinput, exit_c, ppid);
 		file_access = _findcmd(&command, env);
