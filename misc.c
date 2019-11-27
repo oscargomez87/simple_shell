@@ -37,3 +37,29 @@ void trimspaces(char **pinput)
 		i++;
 	}
 }
+
+
+/**
+ * trimcomments - Removes all character after a #.
+ *
+ * @cmd_arg: double pointer to arguments.
+ */
+void trimcomments(char ***cmd_arg)
+{
+	int i;
+
+	for (i = 0; *(*cmd_arg + i) != NULL; i++)
+		if (*(*(*cmd_arg + i)) == '#')
+		{
+			for (; (*(*cmd_arg + i) != NULL); i++)
+				*(*cmd_arg + i) = NULL;
+			return;
+		}
+}
+
+
+
+
+
+
+
