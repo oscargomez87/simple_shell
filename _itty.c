@@ -9,7 +9,7 @@ void _itty(char *argv)
 {
 	char *pinput = NULL, *env = NULL, *command = NULL, *exit_c = NULL;
 	char **cmd_arg;
-	int file_access, cmd_count = 0;
+	int file_access, cmd_count = 0, cmd_len = 0;
 
 	while (1)
 	{
@@ -18,12 +18,9 @@ void _itty(char *argv)
 			env = _getenv("PATH");
 		if (exit_c == NULL)
 			ecodeinit(&exit_c);
-		_read(&pinput, &env, &cmd_count, exit_c);
-		if (pinput == NULL)
-		{
-			perror(argv);
+		cmd_len = _read(&pinput, &env, &cmd_count, exit_c);
+		if (cmd_len == 1)
 			continue;
-		}
 		trimspaces(&pinput);
 		command = token_command(pinput);
 		cmd_arg = token_arguments(pinput, exit_c);
@@ -34,9 +31,11 @@ void _itty(char *argv)
 			if (file_access == 0)
 				_exec(command, cmd_arg, exit_c, &cmd_count);
 			else
-				perror(argv);
-		} else
-			perror(argv);
+				pdeniederr(argv, exit_c);
+		} else if (file_access == 126)
+			pdeniederr(argv, exit_c);
+		else
+			nfounderr(argv, exit_c);
 		itty_free(pinput, cmd_arg, command);
 	}
 }
