@@ -34,6 +34,6 @@ char *_strcpy(char *, char *);
 char *_strcat(char *, char *);
 char *_strdup(char *);
 void freepcontent(char **);
-void trimcomments(char ***cmd_arg);
+void trimcomments(char **);
 
 #endif
