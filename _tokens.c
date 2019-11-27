@@ -40,7 +40,7 @@ char *token_command(char *command_line)
  * @command_line: pointer to save string in.
  * Return: pointer to array of pointers.
  */
-char **token_arguments(char *command_line)
+char **token_arguments(char *command_line, char *exit_c)
 {
 	int i = 0, number_of_tokens = 0;
 	char *exvar = "$?";
@@ -62,7 +62,7 @@ char **token_arguments(char *command_line)
 			if (_strcmp(result[i + 1], exvar) == 0)
 			{
 				free(result[i + 1]);
-				result[i + 1] = _itoa(errno);
+				result[i + 1] = _strdup(exit_c);
 			}
 		}
 	}
