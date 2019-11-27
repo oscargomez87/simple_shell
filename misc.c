@@ -44,22 +44,31 @@ void trimspaces(char **pinput)
  *
  * @cmd_arg: double pointer to arguments.
  */
-void trimcomments(char ***cmd_arg)
+
+void trimcomments(char **pinput)
 {
 	int i;
 
-	for (i = 0; *(*cmd_arg + i) != NULL; i++)
-		if (*(*(*cmd_arg + i)) == '#')
+	for (i = 0; *(*pinput + i) != '\0'; i++)
+		if (*(*pinput + i) == ' ' && *(*pinput + i + 1) == '#')
 		{
-			for (; (*(*cmd_arg + i) != NULL); i++)
-				*(*cmd_arg + i) = NULL;
-			return;
+			for (i += 1; *(*pinput + i) != '\0'; i++)
+				*(*pinput + i) = '\0';
+			break;
 		}
 }
 
-
-
-
-
-
-
+/*
+ *void trimcomments(char ***cmd_arg)
+ *{
+ *	int i;
+ *
+ *	for (i = 0; *(*cmd_arg + i) != NULL; i++)
+ *		if (*(*(*cmd_arg + i)) == '#')
+ *		{
+ *			for (; (*(*cmd_arg + i) != NULL); i++)
+ *				*(*cmd_arg + i) = NULL;
+ *			return;
+ *		}
+ *}
+ */

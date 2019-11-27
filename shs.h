@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <fcntl.h>
+#include <signal.h>
 
 extern char **environ;
 
@@ -35,7 +36,7 @@ char *_strcpy(char *, char *);
 char *_strcat(char *, char *);
 char *_strdup(char *);
 void freepcontent(char **);
-void trimcomments(char ***);
+void trimcomments(char **);
 void mpidinit(char **, pid_t);
 
 #endif

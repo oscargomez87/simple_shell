@@ -1,6 +1,17 @@
 #include "shs.h"
 
 /**
+ * sighandler - Handle the signal CTRL + C.
+ *
+ * @signum: parameters received from signal.
+ */
+void sighandler(int signum)
+{
+	(void) signum;
+	write(STDOUT_FILENO, "\n$ ", 3);
+}
+
+/**
  * _itty - Interactive, waits for input then calls program if it is found.
  *
  * @argv: parameters received from main(), name of the application.
@@ -13,6 +24,7 @@ void _itty(char *argv, pid_t my_pid)
 	char **cmd_arg;
 	int file_access, cmd_count = 0, cmd_len = 0;
 
+	signal(SIGINT, sighandler);
 	while (1)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
@@ -26,9 +38,9 @@ void _itty(char *argv, pid_t my_pid)
 		if (cmd_len == 1)
 			continue;
 		trimspaces(&pinput);
+		trimcomments(&pinput);
 		command = token_command(pinput);
 		cmd_arg = token_arguments(pinput, exit_c, ppid);
-		trimcomments(&cmd_arg);
 		file_access = _findcmd(&command, env);
 		if (file_access == 0)
 		{
