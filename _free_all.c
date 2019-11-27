@@ -23,6 +23,6 @@ void itty_free(char *pinput, char **cmd_arg, char *command)
  */
 void ntty_free(char **cmd_arg, char *command)
 {
-	  free(command);
-	  free(cmd_arg);
+	free(command);
+	free(cmd_arg);
 }
