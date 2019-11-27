@@ -36,6 +36,6 @@ char *_strcat(char *, char *);
 char *_strdup(char *);
 void freepcontent(char **);
 void trimcomments(char **);
-void void trimexit(char **pinput, char **env, char *exit_c);
+void trimexit(char **pinput, char **env, char *exit_c);
 
 #endif
