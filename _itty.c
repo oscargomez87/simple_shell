@@ -22,9 +22,10 @@ void _itty(char *argv)
 		if (cmd_len == 1)
 			continue;
 		trimspaces(&pinput);
+		trimcomments(&pinput);
 		command = token_command(pinput);
 		cmd_arg = token_arguments(pinput, exit_c);
-		trimcomments(&cmd_arg);
+		/*trimcomments(&cmd_arg);*/
 		file_access = _findcmd(&command, env);
 		if (file_access == 0)
 		{
