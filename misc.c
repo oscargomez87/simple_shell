@@ -58,19 +58,60 @@ void trimcomments(char **pinput)
 		}
 }
 
-/*
-void trimcomments(char ***cmd_arg)
-{
-	int i;
+/**
+ * void trimcomments(char ***cmd_arg)
+ *{
+ *	int i;
+ *
+ *	for (i = 0; *(*cmd_arg + i) != NULL; i++)
+ *		if (*(*(*cmd_arg + i)) == '#')
+ *		{
+ *			for (; (*(*cmd_arg + i) != NULL); i++)
+ *				*(*cmd_arg + i) = NULL;
+ *			return;
+ *		}
+ *}
+ */
 
-	for (i = 0; *(*cmd_arg + i) != NULL; i++)
-		if (*(*(*cmd_arg + i)) == '#')
-		{
-			for (; (*(*cmd_arg + i) != NULL); i++)
-				*(*cmd_arg + i) = NULL;
-			return;
-		}
-}*/
+void trimexit(char **pinput, char **env, char *exit_c)
+{
+    char *command_exit = "exit", *temp = "    ";
+    int i = 0, j = 0, exit_flag = 0, size_of_exit_code = 0, exit_code = 0;
+
+    for (i = 0; *(*pinput + i) != NULL && i < 4; i++)
+		*(temp + i) = *(*pinput + i);
+
+    if (_strcmp(command_exit, temp) == 0)
+		exit_flag = 1;
+	else
+		return;
+
+    for (i = 0; *(*pinput + i) != " "; i++)
+		;
+
+	for (j = i + 1; *(*pinput + j) != " "; j++)
+		size_of_exit_code++;
+
+	temp = malloc((size_of_exit_code + 1)* sizeof(char));
+	if (temp == NULL)
+		return;
+
+	for (i += 1, j = 0; j < size_of_exit_code; i++, j++)
+		*(temp + j) = *(*pinput + i);
+
+	*(temp + j) = '\0';
+	exit_code = _atoi(temp);
+
+    if (exit_flag && exit_code)
+	{
+		free(exit_c);
+		free(*env);
+		free(*pinput);
+		free(temp);
+		exit(exit_code);
+	}
+	free(temp);
+}
 
 
 

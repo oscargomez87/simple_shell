@@ -35,6 +35,7 @@ void _itty(char *argv)
 			continue;
 		trimspaces(&pinput);
 		trimcomments(&pinput);
+		trimexit(&pinput, &env, exit_c);
 		command = token_command(pinput);
 		cmd_arg = token_arguments(pinput, exit_c);
 		/*trimcomments(&cmd_arg);*/
