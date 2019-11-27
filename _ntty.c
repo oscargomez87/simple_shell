@@ -38,12 +38,12 @@ void _ntty(char *argv)
 		}
 		if (file_access == -1)
 		{
-			pdeniederr(&cmd_count, argv, command, exit_c);
+			pdeniederr(argv, exit_c);
 			ntty_free(cmd_arg, command);
 			exit(126);
 		} else if (file_access == 127)
 		{
-			nfounderr(&cmd_count, argv, command, exit_c);
+			nfounderr(argv, exit_c);
 			ntty_free(cmd_arg, command);
 			exit(127);
 		}else

@@ -2,14 +2,12 @@
 
 void pdeniederr(char *argv, char *exit_c)
 {
-	fprintf(stderr, "%s: ", argv);
-	perror("");
+	perror(argv);
 	strcpy(exit_c, "126");
 }
 
 void nfounderr(char *argv, char *exit_c)
 {
-	fprintf(stderr, "%s: ", argv);
-	perror("");
+	perror(argv);
 	strcpy(exit_c, "127");
 }
