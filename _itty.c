@@ -13,7 +13,7 @@ void _itty(char *argv)
 
 	while (1)
 	{
-		printf("$ ");
+		write(STDOUT_FILENO, "$ ", 2);
 		if (env == NULL)
 			env = _getenv("PATH");
 		if (exit_c == NULL)
