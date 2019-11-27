@@ -21,7 +21,7 @@ void _exec(char *command, char **cmd_arg, char *exit_c, int *cmd_count)
 	{
 		execve(command, cmd_arg, environ);
 		free(command);
-		free(*cmd_arg);
+		free(cmd_arg);
 		free(exit_c);
 	} else
 	{
@@ -33,4 +33,6 @@ void _exec(char *command, char **cmd_arg, char *exit_c, int *cmd_count)
 			_itoa(wait_status, exit_c);
 		}
 	}
+	if (child_pid == 0)
+		_exit(0);
 }

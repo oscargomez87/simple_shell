@@ -18,6 +18,7 @@ void _ntty(char *argv)
 	_read(&pinput, &env, &cmd_count, exit_c);
 	if (pinput == NULL)
 		return;
+	trimspaces(&pinput);
 	command = token_command(pinput);
 	cmd_arg = token_arguments(pinput, exit_c);
 	file_access = _findcmd(&command, env);

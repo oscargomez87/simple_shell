@@ -8,11 +8,22 @@
  */
 char *token_command(char *command_line)
 {
-	int i = 0, command_size = 0;
+	int i, j, command_size = 0;
+	const char delimit[7] = " \t\r\n\v\f";
 	char *result = NULL;
 
-	for (i = 0; command_line[i] != 32 && command_line[i] != '\0'; i++)
-		command_size++;
+	for (i = 0; command_line[i] != '\0'; i++)
+	{
+		for (j = 0; delimit[j] != '\0'; j++)
+		{
+			if (command_line[i] == delimit[j])
+				break;
+		}
+		if (delimit[j] == '\0')
+			command_size++;
+		else
+			break;
+	}
 
 	result = (char *) malloc((command_size + 1) * sizeof(char));
 	if (result == NULL)
