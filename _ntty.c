@@ -16,15 +16,14 @@ void _ntty(char *argv, pid_t my_pid)
 	ssize_t cmd_len;
 
 	env = _getenv("PATH");
-	ecodeinit(&exit_c);
-	mpidinit(&ppid, my_pid);
-	cmd_len = _read(&pinput, &env, &cmd_count, exit_c, ppid);
+        ecodeinit(&exit_c);
+        mpidinit(&ppid, my_pid);
+        cmd_len = _read(&pinput, &env, &cmd_count, exit_c, ppid);
 	temp = pinput;
 	while (cmd_len >= 0)
 	{
 		trimspaces(&pinput);
 		trimcomments(&pinput);
-		trimexit(&pinput, &env, exit_c);
 		command = token_command(pinput);
 		cmd_arg = token_arguments(pinput, exit_c, ppid);
 		file_access = _findcmd(&command, env);
