@@ -87,6 +87,8 @@ void trimexit(char **pinput, char **env, char *exit_c)
 		;
 	for (j = i + 1; *(*pinput + j) != ' ' && *(*pinput + j) != '\0'; j++)
 		size_of_exit_code++;
+	free(temp);
+	temp = NULL;
 	temp = malloc((size_of_exit_code + 1) * sizeof(char));
 	if (temp == NULL)
 		return;
