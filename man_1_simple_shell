@@ -12,9 +12,10 @@
 
 .SH DESCRIPTION
 .B simple_shell
-is a UNIX command line interpreter that display a prompt and wait for the user to type a command. 
-A command line always ends with a new line. The prompt isdisplayed again each time a command has 
-been executed. Use the PATH, and handle commands with arguments.
+is a UNIX command line interpreter that display a prompt and wait for the user
+to type a command. A command line always ends with a new line. The prompt
+isdisplayed again each time a command has been executed. Use the PATH, and
+handle commands with arguments.
 
 The current version of simple_shell is in the process of being changed to
 conform with the Holberton School specifications for the shell.  This version
