@@ -23,8 +23,7 @@ void _ntty(char *argv, pid_t my_pid)
 	while (cmd_len >= 0)
 	{
 		trimspaces(&pinput);
-                trimcomments(&pinput);
-                trimexit(&pinput, &env, exit_c);
+		trimcomments(&pinput);
 		command = token_command(pinput);
 		cmd_arg = token_arguments(pinput, exit_c, ppid);
 		file_access = _findcmd(&command, env);
