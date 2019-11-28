@@ -16,9 +16,9 @@ void _ntty(char *argv, pid_t my_pid)
 	ssize_t cmd_len;
 
 	env = _getenv("PATH");
-        ecodeinit(&exit_c);
-        mpidinit(&ppid, my_pid);
-        cmd_len = _read(&pinput, &env, &cmd_count, exit_c, ppid);
+	ecodeinit(&exit_c);
+	mpidinit(&ppid, my_pid);
+	cmd_len = _read(&pinput, &env, &cmd_count, exit_c, ppid);
 	temp = pinput;
 	while (cmd_len >= 0)
 	{
