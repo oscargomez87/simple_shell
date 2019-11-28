@@ -69,7 +69,7 @@ void trimcomments(char **pinput)
  */
 void trimexit(char **pinput, char **env, char *exit_c)
 {
-	char *command_exit = "exit", *temp;
+	char *command_exit = "exit", *temp = NULL;
 	int i = 0, j = 0, exit_flag = 0, size_of_exit_code = 0, exit_code = 0;
 
 	temp = malloc(5 * sizeof(char));
